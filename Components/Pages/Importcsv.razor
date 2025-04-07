@@ -1,0 +1,133 @@
+﻿@page "/Importcsv"
+@inject IJSRuntime JSRuntime
+
+<h3>Import CSV Data</h3>
+<div class="container">
+    <div class="form-group">
+        <button class="btn btn-primary" @onclick="SelectFile">Browse</button>
+        <span>@filePath</span>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-success" @onclick="HandleCsvImport" disabled="@isImportButtonDisabled">Import</button>
+    </div>
+
+    <div class="form-group">
+        <label>Status:</label>
+        <span class="status-message">@statusMessage</span>
+    </div>
+
+    @if (csvData != null && csvData.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    @foreach (var header in csvData[0].Keys)
+                    {
+                        <th>@header</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var row in csvData)
+                {
+                    <tr>
+                        @foreach (var value in row.Values)
+                        {
+                            <td>@value</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+@code {
+    private string filePath = string.Empty;
+    private string statusMessage = "No file selected.";
+    private bool isImportButtonDisabled = true;
+    private List<Dictionary<string, string>> csvData = null;  // To hold the parsed CSV data
+
+    private async Task SelectFile()
+    {
+        // Call JavaScript function to select and read file
+        var fileContent = await JSRuntime.InvokeAsync<string>("selectAndReadFile");
+
+        if (string.IsNullOrEmpty(fileContent))
+        {
+            statusMessage = "Failed to read the file.";
+            return;
+        }
+
+        // Parse CSV content into a list of dictionaries (each row is a dictionary of column name -> value)
+        csvData = ParseCsv(fileContent);
+        filePath = "File Selected";  // Indicate file was selected
+        isImportButtonDisabled = false;  // Enable the "Import" button
+        statusMessage = "CSV Imported Successfully!";
+    }
+
+    private List<Dictionary<string, string>> ParseCsv(string csvContent)
+    {
+        var rows = new List<Dictionary<string, string>>();
+        var lines = csvContent.Split('\n');
+
+        if (lines.Length == 0)
+            return rows;
+
+        var headers = lines[0].Split(',');
+
+        for (int i = 1; i < lines.Length; i++)
+        {
+            var row = new Dictionary<string, string>();
+            var cells = lines[i].Split(',');
+
+            for (int j = 0; j < headers.Length; j++)
+            {
+                if (j < cells.Length)
+                    row[headers[j]] = cells[j].Trim();
+            }
+
+            if (row.Count > 0)
+                rows.Add(row);
+        }
+
+        return rows;
+    }
+
+    // Renamed from ImportCsv to HandleCsvImport to avoid conflict with the 'ImportCsv' type error
+    private async Task HandleCsvImport()
+    {
+        // If file has already been processed by SelectFile, it's ready to import/display
+        statusMessage = "CSV Imported Successfully!";
+    }
+}
+
+
+<script>
+    window.selectAndReadFile = async () => {
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = ".txt";  // Optionally, filter for CSV files
+
+        return new Promise((resolve, reject) => {
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        resolve(event.target.result);  // Return file content
+                    };
+                    reader.onerror = (error) => {
+                        reject(error);
+                    };
+                    reader.readAsText(file);
+                } else {
+                    resolve(null);  // Return null if no file is selected
+                }
+            };
+            input.click();
+        });
+    };
+</script>
+
