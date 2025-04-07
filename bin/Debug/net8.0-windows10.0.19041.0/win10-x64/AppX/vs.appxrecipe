@@ -30,7 +30,7 @@
     <AppXManifest Include="C:\Users\LG\source\repos\BlazorDesktop\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2025-04-07T19:33:17.601</Modified>
+      <Modified>2025-04-07T20:36:23.775</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
@@ -44,11 +44,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\LG\source\repos\BlazorDesktop\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\BlazorDesktop.dll">
       <PackagePath>BlazorDesktop.dll</PackagePath>
-      <Modified>2025-04-06T02:15:03.702</Modified>
+      <Modified>2025-04-07T20:36:22.821</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\LG\source\repos\BlazorDesktop\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>BlazorDesktop.exe</PackagePath>
-      <Modified>2025-04-06T02:15:03.708</Modified>
+      <Modified>2025-04-07T20:36:22.870</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\LG\source\repos\BlazorDesktop\Resources\Raw\AboutAssets.txt">
       <PackagePath>AboutAssets.txt</PackagePath>

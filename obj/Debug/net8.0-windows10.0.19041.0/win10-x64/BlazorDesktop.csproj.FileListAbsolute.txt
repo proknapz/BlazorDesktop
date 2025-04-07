@@ -240,3 +240,4 @@ C:\Users\LG\source\repos\BlazorDesktop\bin\Debug\net8.0-windows10.0.19041.0\win1
 C:\Users\LG\source\repos\BlazorDesktop\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\Microsoft.Extensions.Caching.Memory.dll
 C:\Users\LG\source\repos\BlazorDesktop\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\MySqlConnector.dll
 C:\Users\LG\source\repos\BlazorDesktop\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\LG\source\repos\BlazorDesktop\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\BlazorDesktop.sourcelink.json
