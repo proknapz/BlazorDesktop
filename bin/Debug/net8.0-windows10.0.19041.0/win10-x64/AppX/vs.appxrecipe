@@ -30,25 +30,25 @@
     <AppXManifest Include="C:\Users\LG\source\repos\BlazorDesktop\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2025-04-07T20:36:23.775</Modified>
+      <Modified>2025-04-08T02:37:58.370</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\LG\source\repos\BlazorDesktop\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2025-04-05T00:24:39.802</Modified>
+      <Modified>2025-04-08T02:37:58.176</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\LG\source\repos\BlazorDesktop\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\BlazorDesktop.runtimeconfig.json">
       <PackagePath>BlazorDesktop.runtimeconfig.json</PackagePath>
-      <Modified>2025-04-05T00:24:39.597</Modified>
+      <Modified>2025-04-08T02:37:58.097</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\LG\source\repos\BlazorDesktop\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\BlazorDesktop.dll">
       <PackagePath>BlazorDesktop.dll</PackagePath>
-      <Modified>2025-04-07T20:36:22.821</Modified>
+      <Modified>2025-04-08T02:39:45.853</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\LG\source\repos\BlazorDesktop\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>BlazorDesktop.exe</PackagePath>
-      <Modified>2025-04-07T20:36:22.870</Modified>
+      <Modified>2025-04-08T02:39:49.364</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\LG\source\repos\BlazorDesktop\Resources\Raw\AboutAssets.txt">
       <PackagePath>AboutAssets.txt</PackagePath>
@@ -308,7 +308,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\LG\source\repos\BlazorDesktop\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\BlazorDesktop.deps.json">
       <PackagePath>BlazorDesktop.deps.json</PackagePath>
-      <Modified>2025-04-05T00:24:39.594</Modified>
+      <Modified>2025-04-08T02:39:45.850</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\LG\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.57\lib\net8.0\Microsoft.Windows.SDK.NET.dll">
       <PackagePath>Microsoft.Windows.SDK.NET.dll</PackagePath>
