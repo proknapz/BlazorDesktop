@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using ShareData;
+
 public class ApplicationDbContext : DbContext
 {
     // Constructor that passes options to the base DbContext
