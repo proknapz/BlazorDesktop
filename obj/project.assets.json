@@ -927,7 +927,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -3026,16 +3026,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -3965,7 +3955,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -6014,16 +6004,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -6953,7 +6933,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -9002,16 +8982,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -9941,7 +9911,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -11990,16 +11960,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -12929,7 +12889,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -14978,16 +14938,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -15917,7 +15867,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -17966,16 +17916,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -18905,7 +18845,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -20954,16 +20894,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -21893,7 +21823,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -23943,16 +23873,6 @@
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
         }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
-        }
       }
     },
     "net8.0-ios18.0": {
@@ -24857,7 +24777,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -25298,16 +25218,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -26213,7 +26123,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -26703,16 +26613,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -27618,7 +27518,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -28108,16 +28008,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -29023,7 +28913,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -29513,16 +29403,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -30428,7 +30308,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -30918,16 +30798,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -31833,7 +31703,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -32323,16 +32193,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -33238,7 +33098,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -33728,16 +33588,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -34643,7 +34493,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -35125,16 +34975,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -36040,7 +35880,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -36481,16 +36321,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -37396,7 +37226,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -37886,16 +37716,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -38801,7 +38621,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -39291,16 +39111,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -40206,7 +40016,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -40696,16 +40506,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -41611,7 +41411,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -42101,16 +41901,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -43016,7 +42806,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -43506,16 +43296,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -44421,7 +44201,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -44911,16 +44691,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -45826,7 +45596,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -46308,16 +46078,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -47833,16 +47593,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -49368,16 +49118,6 @@
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
         }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
-        }
       }
     },
     "net8.0-windows10.0.19041/android-arm64": {
@@ -50901,16 +50641,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -52436,16 +52166,6 @@
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
         }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
-        }
       }
     },
     "net8.0-windows10.0.19041/android-x86": {
@@ -53969,16 +53689,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     },
@@ -55504,16 +55214,6 @@
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
         }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
-        }
       }
     },
     "net8.0-windows10.0.19041/maccatalyst-x64": {
@@ -57038,16 +56738,6 @@
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
         }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
-        }
       }
     },
     "net8.0-windows10.0.19041/win10-x64": {
@@ -58569,16 +58259,6 @@
         },
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {}
-        }
-      },
-      "ShareData/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/ShareData.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShareData.dll": {}
         }
       }
     }
@@ -60586,10 +60266,10 @@
         "microsoft.maui.resizetizer.nuspec"
       ]
     },
-    "Microsoft.NET.ILLink.Tasks/8.0.13": {
-      "sha512": "R19ZTaRiQAK+xo9ZwaHbF/1vb1wwR1Wn5+sqp9v8+CDjbdS8R6qftKdw0VSXWKm7VAMi7P+NCU4zxDzhEWcAwQ==",
+    "Microsoft.NET.ILLink.Tasks/8.0.14": {
+      "sha512": "4U2fd7PexNKrK5ZqfqIcXZj9/lRRjFsLgA/pxuFQTuGQuLYP/+7yACz/j7EmWbEj/fspOf4mafi/vHIy/rKDzQ==",
       "type": "package",
-      "path": "microsoft.net.illink.tasks/8.0.13",
+      "path": "microsoft.net.illink.tasks/8.0.14",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -60603,7 +60283,7 @@
         "build/Microsoft.NET.ILLink.Analyzers.props",
         "build/Microsoft.NET.ILLink.Tasks.props",
         "build/Microsoft.NET.ILLink.targets",
-        "microsoft.net.illink.tasks.8.0.13.nupkg.sha512",
+        "microsoft.net.illink.tasks.8.0.14.nupkg.sha512",
         "microsoft.net.illink.tasks.nuspec",
         "tools/net472/ILLink.Tasks.dll",
         "tools/net472/ILLink.Tasks.dll.config",
@@ -64803,11 +64483,6 @@
         "zstdsharp.port.0.8.0.nupkg.sha512",
         "zstdsharp.port.nuspec"
       ]
-    },
-    "ShareData/1.0.0": {
-      "type": "project",
-      "path": "../ShareData/ShareData.csproj",
-      "msbuildProject": "../ShareData/ShareData.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -64816,30 +64491,27 @@
       "Microsoft.Extensions.Logging.Debug >= 8.0.1",
       "Microsoft.Maui.Controls >= 8.0.100",
       "Microsoft.Maui.Controls.Compatibility >= 8.0.100",
-      "Microsoft.NET.ILLink.Tasks >= 8.0.13",
+      "Microsoft.NET.ILLink.Tasks >= 8.0.14",
       "MySql.Data >= 9.2.0",
-      "Pomelo.EntityFrameworkCore.MySql >= 8.0.3",
-      "ShareData >= 1.0.0"
+      "Pomelo.EntityFrameworkCore.MySql >= 8.0.3"
     ],
     "net8.0-ios18.0": [
       "Microsoft.AspNetCore.Components.WebView.Maui >= 8.0.100",
       "Microsoft.Extensions.Logging.Debug >= 8.0.1",
       "Microsoft.Maui.Controls >= 8.0.100",
       "Microsoft.Maui.Controls.Compatibility >= 8.0.100",
-      "Microsoft.NET.ILLink.Tasks >= 8.0.13",
+      "Microsoft.NET.ILLink.Tasks >= 8.0.14",
       "MySql.Data >= 9.2.0",
-      "Pomelo.EntityFrameworkCore.MySql >= 8.0.3",
-      "ShareData >= 1.0.0"
+      "Pomelo.EntityFrameworkCore.MySql >= 8.0.3"
     ],
     "net8.0-maccatalyst18.0": [
       "Microsoft.AspNetCore.Components.WebView.Maui >= 8.0.100",
       "Microsoft.Extensions.Logging.Debug >= 8.0.1",
       "Microsoft.Maui.Controls >= 8.0.100",
       "Microsoft.Maui.Controls.Compatibility >= 8.0.100",
-      "Microsoft.NET.ILLink.Tasks >= 8.0.13",
+      "Microsoft.NET.ILLink.Tasks >= 8.0.14",
       "MySql.Data >= 9.2.0",
-      "Pomelo.EntityFrameworkCore.MySql >= 8.0.3",
-      "ShareData >= 1.0.0"
+      "Pomelo.EntityFrameworkCore.MySql >= 8.0.3"
     ],
     "net8.0-windows10.0.19041": [
       "Microsoft.AspNetCore.Components.WebView.Maui >= 8.0.100",
@@ -64847,29 +64519,28 @@
       "Microsoft.Maui.Controls >= 8.0.100",
       "Microsoft.Maui.Controls.Compatibility >= 8.0.100",
       "MySql.Data >= 9.2.0",
-      "Pomelo.EntityFrameworkCore.MySql >= 8.0.3",
-      "ShareData >= 1.0.0"
+      "Pomelo.EntityFrameworkCore.MySql >= 8.0.3"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\LG\\.nuget\\packages\\": {},
+    "C:\\Users\\Dell\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\BlazorDesktop.csproj",
+      "projectUniqueName": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\BlazorDesktop.csproj",
       "projectName": "BlazorDesktop",
-      "projectPath": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\BlazorDesktop.csproj",
-      "packagesPath": "C:\\Users\\LG\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\obj\\",
+      "projectPath": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\BlazorDesktop.csproj",
+      "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\LG\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -64887,35 +64558,19 @@
       "frameworks": {
         "net8.0-android34.0": {
           "targetAlias": "net8.0-android",
-          "projectReferences": {
-            "C:\\Users\\LG\\source\\repos\\ShareData\\ShareData.csproj": {
-              "projectPath": "C:\\Users\\LG\\source\\repos\\ShareData\\ShareData.csproj"
-            }
-          }
+          "projectReferences": {}
         },
         "net8.0-ios18.0": {
           "targetAlias": "net8.0-ios",
-          "projectReferences": {
-            "C:\\Users\\LG\\source\\repos\\ShareData\\ShareData.csproj": {
-              "projectPath": "C:\\Users\\LG\\source\\repos\\ShareData\\ShareData.csproj"
-            }
-          }
+          "projectReferences": {}
         },
         "net8.0-maccatalyst18.0": {
           "targetAlias": "net8.0-maccatalyst",
-          "projectReferences": {
-            "C:\\Users\\LG\\source\\repos\\ShareData\\ShareData.csproj": {
-              "projectPath": "C:\\Users\\LG\\source\\repos\\ShareData\\ShareData.csproj"
-            }
-          }
+          "projectReferences": {}
         },
         "net8.0-windows10.0.19041": {
           "targetAlias": "net8.0-windows10.0.19041.0",
-          "projectReferences": {
-            "C:\\Users\\LG\\source\\repos\\ShareData\\ShareData.csproj": {
-              "projectPath": "C:\\Users\\LG\\source\\repos\\ShareData\\ShareData.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
@@ -64953,7 +64608,7 @@
           "Microsoft.NET.ILLink.Tasks": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[8.0.13, )",
+            "version": "[8.0.14, )",
             "autoReferenced": true
           },
           "MySql.Data": {
@@ -64979,23 +64634,23 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.Android.Ref.34",
-            "version": "[34.0.148, 34.0.148]"
+            "version": "[34.0.147, 34.0.147]"
           },
           {
             "name": "Microsoft.Android.Runtime.34.android-arm",
-            "version": "[34.0.148, 34.0.148]"
+            "version": "[34.0.147, 34.0.147]"
           },
           {
             "name": "Microsoft.Android.Runtime.34.android-arm64",
-            "version": "[34.0.148, 34.0.148]"
+            "version": "[34.0.147, 34.0.147]"
           },
           {
             "name": "Microsoft.Android.Runtime.34.android-x64",
-            "version": "[34.0.148, 34.0.148]"
+            "version": "[34.0.147, 34.0.147]"
           },
           {
             "name": "Microsoft.Android.Runtime.34.android-x86",
-            "version": "[34.0.148, 34.0.148]"
+            "version": "[34.0.147, 34.0.147]"
           }
         ],
         "frameworkReferences": {
@@ -65006,7 +64661,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
       },
       "net8.0-ios18.0": {
         "targetAlias": "net8.0-ios",
@@ -65030,7 +64685,7 @@
           "Microsoft.NET.ILLink.Tasks": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[8.0.13, )",
+            "version": "[8.0.14, )",
             "autoReferenced": true
           },
           "MySql.Data": {
@@ -65071,7 +64726,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
       },
       "net8.0-maccatalyst18.0": {
         "targetAlias": "net8.0-maccatalyst",
@@ -65095,7 +64750,7 @@
           "Microsoft.NET.ILLink.Tasks": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[8.0.13, )",
+            "version": "[8.0.14, )",
             "autoReferenced": true
           },
           "MySql.Data": {
@@ -65137,7 +64792,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
       },
       "net8.0-windows10.0.19041": {
         "targetAlias": "net8.0-windows10.0.19041.0",
@@ -65192,7 +64847,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201\\RuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {

@@ -1,38 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\",
+  "WorkspaceRootPath": "C:\\Users\\Dell\\source\\repos\\BlazorDesktop\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2E148419-0CBB-8112-2852-2EAF6F3D1062}|BlazorDesktop.csproj|c:\\users\\lg\\source\\repos\\blazordesktop\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E148419-0CBB-8112-2852-2EAF6F3D1062}|BlazorDesktop.csproj|solutionrelative:applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E148419-0CBB-8112-2852-2EAF6F3D1062}|BlazorDesktop.csproj|c:\\users\\lg\\source\\repos\\blazordesktop\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{2E148419-0CBB-8112-2852-2EAF6F3D1062}|BlazorDesktop.csproj|c:\\users\\dell\\source\\repos\\blazordesktop\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{2E148419-0CBB-8112-2852-2EAF6F3D1062}|BlazorDesktop.csproj|solutionrelative:components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2E148419-0CBB-8112-2852-2EAF6F3D1062}|BlazorDesktop.csproj|c:\\users\\lg\\source\\repos\\blazordesktop\\blazordesktop.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "AbsoluteMoniker": "D:0:0:{2E148419-0CBB-8112-2852-2EAF6F3D1062}|BlazorDesktop.csproj|c:\\users\\dell\\source\\repos\\blazordesktop\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2E148419-0CBB-8112-2852-2EAF6F3D1062}|BlazorDesktop.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E148419-0CBB-8112-2852-2EAF6F3D1062}|BlazorDesktop.csproj|c:\\users\\dell\\source\\repos\\blazordesktop\\blazordesktop.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{2E148419-0CBB-8112-2852-2EAF6F3D1062}|BlazorDesktop.csproj|solutionrelative:blazordesktop.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2E148419-0CBB-8112-2852-2EAF6F3D1062}|BlazorDesktop.csproj|c:\\users\\lg\\source\\repos\\blazordesktop\\components\\pages\\importcsv.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{2E148419-0CBB-8112-2852-2EAF6F3D1062}|BlazorDesktop.csproj|c:\\users\\dell\\source\\repos\\blazordesktop\\components\\pages\\importcsv.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{2E148419-0CBB-8112-2852-2EAF6F3D1062}|BlazorDesktop.csproj|solutionrelative:components\\pages\\importcsv.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E148419-0CBB-8112-2852-2EAF6F3D1062}|BlazorDesktop.csproj|c:\\users\\lg\\source\\repos\\blazordesktop\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{2E148419-0CBB-8112-2852-2EAF6F3D1062}|BlazorDesktop.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E148419-0CBB-8112-2852-2EAF6F3D1062}|BlazorDesktop.csproj|c:\\users\\lg\\source\\repos\\blazordesktop\\instructor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E148419-0CBB-8112-2852-2EAF6F3D1062}|BlazorDesktop.csproj|solutionrelative:instructor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E148419-0CBB-8112-2852-2EAF6F3D1062}|BlazorDesktop.csproj|c:\\users\\lg\\source\\repos\\blazordesktop\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{2E148419-0CBB-8112-2852-2EAF6F3D1062}|BlazorDesktop.csproj|solutionrelative:mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E148419-0CBB-8112-2852-2EAF6F3D1062}|BlazorDesktop.csproj|c:\\users\\lg\\source\\repos\\blazordesktop\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E148419-0CBB-8112-2852-2EAF6F3D1062}|BlazorDesktop.csproj|solutionrelative:mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,108 +26,64 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 5,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "BlazorDesktop",
-              "DocumentMoniker": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\BlazorDesktop.csproj",
-              "RelativeDocumentMoniker": "BlazorDesktop.csproj",
-              "ToolTip": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\BlazorDesktop.csproj",
-              "RelativeToolTip": "BlazorDesktop.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-08T02:30:30.91Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Importcsv.razor",
-              "DocumentMoniker": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\Components\\Pages\\Importcsv.razor",
+              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\BlazorDesktop\\Components\\Pages\\Importcsv.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Importcsv.razor",
-              "ToolTip": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\Components\\Pages\\Importcsv.razor",
+              "ToolTip": "C:\\Users\\Dell\\source\\repos\\BlazorDesktop\\Components\\Pages\\Importcsv.razor",
               "RelativeToolTip": "Components\\Pages\\Importcsv.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-08T02:30:20.217Z",
+              "WhenOpened": "2025-04-08T02:06:32.109Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "ApplicationDbContext.cs",
-              "ToolTip": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\ApplicationDbContext.cs",
-              "RelativeToolTip": "ApplicationDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:23:07.107Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-04-08T02:23:04.882Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Instructor.cs",
-              "DocumentMoniker": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\Instructor.cs",
-              "RelativeDocumentMoniker": "Instructor.cs",
-              "ToolTip": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\Instructor.cs",
-              "RelativeToolTip": "Instructor.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:23:02.612Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "MainPage.xaml",
-              "DocumentMoniker": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\MainPage.xaml",
-              "RelativeDocumentMoniker": "MainPage.xaml",
-              "ToolTip": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\MainPage.xaml",
-              "RelativeToolTip": "MainPage.xaml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-08T02:22:59.883Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "MauiProgram.cs",
-              "DocumentMoniker": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\MauiProgram.cs",
-              "RelativeDocumentMoniker": "MauiProgram.cs",
-              "ToolTip": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\MauiProgram.cs",
-              "RelativeToolTip": "MauiProgram.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAA1wAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:22:56.491Z",
+              "DocumentIndex": 2,
+              "Title": "BlazorDesktop.csproj",
+              "DocumentMoniker": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\BlazorDesktop.csproj",
+              "RelativeDocumentMoniker": "BlazorDesktop.csproj",
+              "ToolTip": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\BlazorDesktop.csproj",
+              "RelativeToolTip": "BlazorDesktop.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-08T02:05:02.28Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\BlazorDesktop\\App.xaml",
+              "RelativeDocumentMoniker": "App.xaml",
+              "ToolTip": "C:\\Users\\Dell\\source\\repos\\BlazorDesktop\\App.xaml",
+              "RelativeToolTip": "App.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-08T02:03:11.443Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "Home.razor",
-              "DocumentMoniker": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\Components\\Pages\\Home.razor",
+              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\BlazorDesktop\\Components\\Pages\\Home.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Home.razor",
-              "ToolTip": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\Components\\Pages\\Home.razor",
+              "ToolTip": "C:\\Users\\Dell\\source\\repos\\BlazorDesktop\\Components\\Pages\\Home.razor",
               "RelativeToolTip": "Components\\Pages\\Home.razor",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAAABEAAAAPAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-04-07T20:37:59.454Z",
               "EditorCaption": ""
