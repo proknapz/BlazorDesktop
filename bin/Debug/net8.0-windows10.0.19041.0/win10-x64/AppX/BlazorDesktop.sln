@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35913.81 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{911E67C6-3D85-4FCE-B560-20A9C3E3FF48}") = "BlazorDesktop", "BlazorDesktop.exe", "{BFD998DF-7648-8C33-2C9D-9B35C9980B3A}"
+	ProjectSection(DebuggerProjectSystem) = preProject
+		PortSupplier = 00000000-0000-0000-0000-000000000000
+		Executable = C:\Users\Dell\source\repos\BlazorDesktop\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\AppX\BlazorDesktop.exe
+		RemoteMachine = DESKTOP-3J2FG8E
+		StartingDirectory = C:\Users\Dell\source\repos\BlazorDesktop\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\AppX
+		Environment = Default
+		LaunchingEngine = 00000000-0000-0000-0000-000000000000
+		UseLegacyDebugEngines = No
+		LaunchSQLEngine = No
+		AttachLaunchAction = No
+		IORedirection = Auto
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BFD998DF-7648-8C33-2C9D-9B35C9980B3A}.Release|x64.ActiveCfg = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D033BAA2-DFBC-4227-8E61-C4974C153DAF}
+	EndGlobalSection
+EndGlobal

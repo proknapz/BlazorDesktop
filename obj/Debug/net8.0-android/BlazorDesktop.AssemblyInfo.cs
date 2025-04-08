@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BlazorDesktop")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+a9ef2e827f6e36dbcf5d5d0f72ee21371b19c23e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+9d135428392e6958ce62002a71232328a29fee30")]
 [assembly: System.Reflection.AssemblyProductAttribute("BlazorDesktop")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BlazorDesktop")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

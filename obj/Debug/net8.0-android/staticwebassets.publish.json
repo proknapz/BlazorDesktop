@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "34vEg1W0kvOWUu3IOHFKztVo4BIko8MRuMmmigEY9fg=",
+  "Hash": "SM/+4BCNJw0DufgjWPLhJWYrkeg6cRZCxxNv6Dw84VU=",
   "Source": "BlazorDesktop",
   "BasePath": "/",
   "Mode": "Root",
@@ -10,17 +10,17 @@
     {
       "Name": "BlazorDesktop\\wwwroot",
       "Source": "BlazorDesktop",
-      "ContentRoot": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\",
       "BasePath": "/",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\obj\\Debug\\net8.0-android\\scopedcss\\bundle\\BlazorDesktop.styles.css",
+      "Identity": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\obj\\Debug\\net8.0-android\\scopedcss\\bundle\\BlazorDesktop.styles.css",
       "SourceId": "BlazorDesktop",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\obj\\Debug\\net8.0-android\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\obj\\Debug\\net8.0-android\\scopedcss\\bundle\\",
       "BasePath": "/",
       "RelativePath": "BlazorDesktop#[.{fingerprint}]?.styles.css",
       "AssetKind": "All",
@@ -35,13 +35,13 @@
       "Integrity": "RTVEh477SuM4UQeRFtxtsplpaGLCt4vDzoNFeVSaJUE=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\obj\\Debug\\net8.0-android\\scopedcss\\bundle\\BlazorDesktop.styles.css"
+      "OriginalItemSpec": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\obj\\Debug\\net8.0-android\\scopedcss\\bundle\\BlazorDesktop.styles.css"
     },
     {
-      "Identity": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\obj\\Debug\\net8.0-android\\scopedcss\\projectbundle\\BlazorDesktop.bundle.scp.css",
+      "Identity": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\obj\\Debug\\net8.0-android\\scopedcss\\projectbundle\\BlazorDesktop.bundle.scp.css",
       "SourceId": "BlazorDesktop",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\obj\\Debug\\net8.0-android\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\obj\\Debug\\net8.0-android\\scopedcss\\projectbundle\\",
       "BasePath": "/",
       "RelativePath": "BlazorDesktop#[.{fingerprint}]!.bundle.scp.css",
       "AssetKind": "All",
@@ -56,13 +56,13 @@
       "Integrity": "RTVEh477SuM4UQeRFtxtsplpaGLCt4vDzoNFeVSaJUE=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\obj\\Debug\\net8.0-android\\scopedcss\\projectbundle\\BlazorDesktop.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\obj\\Debug\\net8.0-android\\scopedcss\\projectbundle\\BlazorDesktop.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\wwwroot\\css\\app.css",
+      "Identity": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\css\\app.css",
       "SourceId": "BlazorDesktop",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/app#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -80,10 +80,10 @@
       "OriginalItemSpec": "wwwroot\\css\\app.css"
     },
     {
-      "Identity": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "Identity": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "SourceId": "BlazorDesktop",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/bootstrap/bootstrap.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -101,10 +101,10 @@
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "BlazorDesktop",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/bootstrap/bootstrap.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -122,10 +122,10 @@
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\wwwroot\\favicon.png",
+      "Identity": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\favicon.png",
       "SourceId": "BlazorDesktop",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "favicon#[.{fingerprint}]?.png",
       "AssetKind": "All",
@@ -143,10 +143,10 @@
       "OriginalItemSpec": "wwwroot\\favicon.png"
     },
     {
-      "Identity": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\wwwroot\\index.html",
+      "Identity": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\index.html",
       "SourceId": "BlazorDesktop",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "index#[.{fingerprint}]?.html",
       "AssetKind": "All",
@@ -167,7 +167,7 @@
   "Endpoints": [
     {
       "Route": "BlazorDesktop.15p0u6krpf.bundle.scp.css",
-      "AssetFile": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\obj\\Debug\\net8.0-android\\scopedcss\\projectbundle\\BlazorDesktop.bundle.scp.css",
+      "AssetFile": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\obj\\Debug\\net8.0-android\\scopedcss\\projectbundle\\BlazorDesktop.bundle.scp.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -188,7 +188,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 04 Apr 2025 19:48:01 GMT"
+          "Value": "Tue, 08 Apr 2025 01:55:52 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -212,7 +212,7 @@
     },
     {
       "Route": "BlazorDesktop.15p0u6krpf.styles.css",
-      "AssetFile": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\obj\\Debug\\net8.0-android\\scopedcss\\bundle\\BlazorDesktop.styles.css",
+      "AssetFile": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\obj\\Debug\\net8.0-android\\scopedcss\\bundle\\BlazorDesktop.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -233,7 +233,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 04 Apr 2025 20:32:36 GMT"
+          "Value": "Tue, 08 Apr 2025 01:55:52 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -257,7 +257,7 @@
     },
     {
       "Route": "BlazorDesktop.bundle.scp.css",
-      "AssetFile": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\obj\\Debug\\net8.0-android\\scopedcss\\projectbundle\\BlazorDesktop.bundle.scp.css",
+      "AssetFile": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\obj\\Debug\\net8.0-android\\scopedcss\\projectbundle\\BlazorDesktop.bundle.scp.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -278,7 +278,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 04 Apr 2025 19:48:01 GMT"
+          "Value": "Tue, 08 Apr 2025 01:55:52 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -294,7 +294,7 @@
     },
     {
       "Route": "BlazorDesktop.styles.css",
-      "AssetFile": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\obj\\Debug\\net8.0-android\\scopedcss\\bundle\\BlazorDesktop.styles.css",
+      "AssetFile": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\obj\\Debug\\net8.0-android\\scopedcss\\bundle\\BlazorDesktop.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -315,7 +315,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 04 Apr 2025 20:32:36 GMT"
+          "Value": "Tue, 08 Apr 2025 01:55:52 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -331,7 +331,7 @@
     },
     {
       "Route": "css/app.css",
-      "AssetFile": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\wwwroot\\css\\app.css",
+      "AssetFile": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\css\\app.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -352,7 +352,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 05 Apr 2025 01:02:36 GMT"
+          "Value": "Tue, 08 Apr 2025 01:55:52 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -368,7 +368,7 @@
     },
     {
       "Route": "css/app.ozhwrghjvc.css",
-      "AssetFile": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\wwwroot\\css\\app.css",
+      "AssetFile": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\css\\app.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -389,7 +389,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 05 Apr 2025 01:02:36 GMT"
+          "Value": "Tue, 08 Apr 2025 01:55:52 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -413,7 +413,7 @@
     },
     {
       "Route": "css/bootstrap/bootstrap.min.6gzpyzhau4.css",
-      "AssetFile": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "AssetFile": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -434,7 +434,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 04 Apr 2025 19:47:50 GMT"
+          "Value": "Tue, 08 Apr 2025 01:55:52 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -458,7 +458,7 @@
     },
     {
       "Route": "css/bootstrap/bootstrap.min.css",
-      "AssetFile": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "AssetFile": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -479,7 +479,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 04 Apr 2025 19:47:50 GMT"
+          "Value": "Tue, 08 Apr 2025 01:55:52 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -495,7 +495,7 @@
     },
     {
       "Route": "css/bootstrap/bootstrap.min.css.8inm30yfxf.map",
-      "AssetFile": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "AssetFile": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -516,7 +516,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 04 Apr 2025 19:47:50 GMT"
+          "Value": "Tue, 08 Apr 2025 01:55:52 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -540,7 +540,7 @@
     },
     {
       "Route": "css/bootstrap/bootstrap.min.css.map",
-      "AssetFile": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "AssetFile": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -561,7 +561,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 04 Apr 2025 19:47:50 GMT"
+          "Value": "Tue, 08 Apr 2025 01:55:52 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -577,7 +577,7 @@
     },
     {
       "Route": "favicon.ifv42okdf2.png",
-      "AssetFile": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\wwwroot\\favicon.png",
+      "AssetFile": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\favicon.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -598,7 +598,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 04 Apr 2025 19:47:50 GMT"
+          "Value": "Tue, 08 Apr 2025 01:55:52 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -622,7 +622,7 @@
     },
     {
       "Route": "favicon.png",
-      "AssetFile": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\wwwroot\\favicon.png",
+      "AssetFile": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\favicon.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -643,7 +643,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 04 Apr 2025 19:47:50 GMT"
+          "Value": "Tue, 08 Apr 2025 01:55:52 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -659,7 +659,7 @@
     },
     {
       "Route": "index.html",
-      "AssetFile": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\wwwroot\\index.html",
+      "AssetFile": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\index.html",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -680,7 +680,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 04 Apr 2025 19:47:50 GMT"
+          "Value": "Tue, 08 Apr 2025 01:55:52 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -696,7 +696,7 @@
     },
     {
       "Route": "index.tg0nv3zk3s.html",
-      "AssetFile": "C:\\Users\\LG\\source\\repos\\BlazorDesktop\\wwwroot\\index.html",
+      "AssetFile": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\index.html",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -717,7 +717,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 04 Apr 2025 19:47:50 GMT"
+          "Value": "Tue, 08 Apr 2025 01:55:52 GMT"
         },
         {
           "Name": "Cache-Control",
