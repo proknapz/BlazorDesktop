@@ -1,0 +1,26 @@
+# Build output
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# MAUI/Blazor Desktop
+**/platforms/**
+*.db
+*.db-shm
+*.db-wal
+
+# Generated code
+*.g.cs
+*.g.i.cs
+*.Designer.cs
+*.AssemblyInfo.cs
+
+# Others
+*.log
+project.assets.json
