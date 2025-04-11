@@ -1,1 +1,0 @@
-C:\Users\LG\source\repos\BlazorDesktop\BlazorDesktop.csproj;x64
