@@ -12,4 +12,7 @@ public class ApplicationDbContext : DbContext
     // Define DbSets for your tables (entities)
     public DbSet<Instructor> Instructors { get; set; }
 
+    public DbSet<Class> Classes { get; set; }
+
+    public DbSet<AttendanceRecord> AttendanceRecords { get; set; }
 }
