@@ -14,4 +14,7 @@ public class AttendanceRecord
     public DateTime ClassDate { get; set; } // Date of the class
     public string CurrentIP { get; set; }  // IP address of the student
 
+    [ForeignKey("StudentId")]
+    public Student Student { get; set; }
+
 }

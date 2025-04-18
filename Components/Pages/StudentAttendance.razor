@@ -15,9 +15,9 @@
         cursor: pointer;
     }
 
-    .class-button:hover {
-        background-color: #f0f0f0;
-    }
+        .class-button:hover {
+            background-color: #f0f0f0;
+        }
 
     .button-container {
         display: flex;
@@ -50,7 +50,11 @@ else
 
 @if (selectedClassId != null)
 {
-    <h4 class="mt-4">Attendance Records for Class ID @selectedClassId</h4>
+    var selectedClass = classList?.FirstOrDefault(c => c.classId == selectedClassId);
+    if (selectedClass != null)
+    {
+        <h4 class="mt-4">Attendance Records for @selectedClass.courseName - @selectedClass.courseNumber</h4>
+    }
 
     @if (attendanceList == null)
     {
@@ -65,28 +69,28 @@ else
         <table class="table table-bordered mt-3">
             <thead>
                 <tr>
-                    <th>Student ID</th>
+                    <th>Student Name</th>
                     <th>Arrival Time</th>
                     <th>Is Present</th>
                     <th>Is Excused</th>
                     <th>Class Date</th>
                     <th>Current IP</th>
+                    <th>Actions</th> <!-- New column for delete -->
                 </tr>
             </thead>
             <tbody>
                 @foreach (var record in attendanceList)
                 {
                     <tr>
-                        <td>@record.StudentId</td>
-                        <td>@record.ArrivalTime.ToString(@"hh\:mm\:ss")</td> @* Custom formatting for TimeSpan *@
-                        <td>
-                            <input type="checkbox" @bind="record.IsPresent" />
-                        </td>
-                        <td>
-                            <input type="checkbox" @bind="record.IsExcused" />
-                        </td>
+                        <td>@record.Student.FirstName @record.Student.LastName</td>
+                        <td>@record.ArrivalTime.ToString(@"hh\:mm\:ss")</td>
+                        <td><input type="checkbox" @bind="record.IsPresent" /></td>
+                        <td><input type="checkbox" @bind="record.IsExcused" /></td>
                         <td>@record.ClassDate.ToShortDateString()</td>
                         <td>@record.CurrentIP</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" @onclick="() => DeleteAttendance(record.AttendanceId)">Delete</button>
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -120,6 +124,7 @@ else
         {
             attendanceList = await DbContext.AttendanceRecords
                 .Where(a => a.ClassId == classId)
+                .Include(a => a.Student)
                 .ToListAsync();
         }
         catch (Exception ex)
@@ -127,13 +132,14 @@ else
             errorMessage = $"Error loading attendance: {ex.Message}";
         }
     }
+
     private async Task SaveChanges()
     {
         try
         {
             DbContext.AttendanceRecords.UpdateRange(attendanceList);
             await DbContext.SaveChangesAsync();
-            errorMessage = null; // Clear previous errors
+            errorMessage = null;
         }
         catch (Exception ex)
         {
@@ -141,4 +147,26 @@ else
         }
     }
 
+    private async Task DeleteAttendance(int attendanceId)
+    {
+        try
+        {
+            var recordToDelete = await DbContext.AttendanceRecords.FindAsync(attendanceId);
+            if (recordToDelete != null)
+            {
+                DbContext.AttendanceRecords.Remove(recordToDelete);
+                await DbContext.SaveChangesAsync();
+
+                // Reload updated attendance list
+                if (selectedClassId.HasValue)
+                {
+                    await LoadAttendanceRecords(selectedClassId.Value);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error deleting record: {ex.Message}";
+        }
+    }
 }
