@@ -24,6 +24,12 @@
         flex-wrap: wrap;
         gap: 0.5rem;
     }
+
+    .marked-for-deletion {
+        text-decoration: line-through;
+        color: gray;
+        background-color: #f9f9f9;
+    }
 </style>
 
 <h3>Select a Class</h3>
@@ -56,11 +62,11 @@ else
         <h4 class="mt-4">Attendance Records for @selectedClass.courseName - @selectedClass.courseNumber</h4>
     }
 
-    @if (attendanceList == null)
+    @if (attendanceViewList == null)
     {
         <p><em>Loading attendance records...</em></p>
     }
-    else if (!attendanceList.Any())
+    else if (!attendanceViewList.Any())
     {
         <p>No attendance records found for this class.</p>
     }
@@ -75,33 +81,41 @@ else
                     <th>Is Excused</th>
                     <th>Class Date</th>
                     <th>Current IP</th>
-                    <th>Actions</th> <!-- New column for delete -->
+                    <th>Delete?</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var record in attendanceList)
+                @foreach (var row in attendanceViewList)
                 {
-                    <tr>
-                        <td>@record.Student.FirstName @record.Student.LastName</td>
-                        <td>@record.ArrivalTime.ToString(@"hh\:mm\:ss")</td>
-                        <td><input type="checkbox" @bind="record.IsPresent" /></td>
-                        <td><input type="checkbox" @bind="record.IsExcused" /></td>
-                        <td>@record.ClassDate.ToShortDateString()</td>
-                        <td>@record.CurrentIP</td>
+                    <tr class="@(row.MarkedForDeletion ? "marked-for-deletion" : "")">
+                        <td>@row.Record.Student.FirstName @row.Record.Student.LastName</td>
+                        <td>@row.Record.ArrivalTime.ToString(@"hh\:mm\:ss")</td>
+                        <td><input type="checkbox" @bind="row.Record.IsPresent" disabled="@row.MarkedForDeletion" /></td>
+                        <td><input type="checkbox" @bind="row.Record.IsExcused" disabled="@row.MarkedForDeletion" /></td>
+                        <td>@row.Record.ClassDate.ToShortDateString()</td>
+                        <td>@row.Record.CurrentIP</td>
                         <td>
-                            <button class="btn btn-danger btn-sm" @onclick="() => DeleteAttendance(record.AttendanceId)">Delete</button>
+                            <input type="checkbox" @bind="row.MarkedForDeletion" />
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
+
         <button class="btn btn-primary mt-3" @onclick="SaveChanges">Save Changes</button>
     }
 }
 
 @code {
+    // ViewModel to track each attendance record and its deletion state
+    public class AttendanceViewModel
+    {
+        public AttendanceRecord Record { get; set; } = default!;
+        public bool MarkedForDeletion { get; set; } = false;
+    }
+
     private List<Class>? classList;
-    private List<AttendanceRecord>? attendanceList;
+    private List<AttendanceViewModel>? attendanceViewList;
     private string? errorMessage;
     private int? selectedClassId;
 
@@ -122,10 +136,15 @@ else
         selectedClassId = classId;
         try
         {
-            attendanceList = await DbContext.AttendanceRecords
+            var records = await DbContext.AttendanceRecords
                 .Where(a => a.ClassId == classId)
                 .Include(a => a.Student)
                 .ToListAsync();
+
+            attendanceViewList = records.Select(record => new AttendanceViewModel
+                {
+                    Record = record
+                }).ToList();
         }
         catch (Exception ex)
         {
@@ -137,36 +156,41 @@ else
     {
         try
         {
-            DbContext.AttendanceRecords.UpdateRange(attendanceList);
+            if (attendanceViewList == null)
+                return;
+
+            var toDelete = attendanceViewList
+                .Where(vm => vm.MarkedForDeletion)
+                .Select(vm => vm.Record)
+                .ToList();
+
+            var toUpdate = attendanceViewList
+                .Where(vm => !vm.MarkedForDeletion)
+                .Select(vm => vm.Record)
+                .ToList();
+
+            if (toDelete.Any())
+            {
+                DbContext.AttendanceRecords.RemoveRange(toDelete);
+            }
+
+            if (toUpdate.Any())
+            {
+                DbContext.AttendanceRecords.UpdateRange(toUpdate);
+            }
+
             await DbContext.SaveChangesAsync();
+
+            if (selectedClassId.HasValue)
+            {
+                await LoadAttendanceRecords(selectedClassId.Value);
+            }
+
             errorMessage = null;
         }
         catch (Exception ex)
         {
             errorMessage = $"Error saving changes: {ex.Message}";
-        }
-    }
-
-    private async Task DeleteAttendance(int attendanceId)
-    {
-        try
-        {
-            var recordToDelete = await DbContext.AttendanceRecords.FindAsync(attendanceId);
-            if (recordToDelete != null)
-            {
-                DbContext.AttendanceRecords.Remove(recordToDelete);
-                await DbContext.SaveChangesAsync();
-
-                // Reload updated attendance list
-                if (selectedClassId.HasValue)
-                {
-                    await LoadAttendanceRecords(selectedClassId.Value);
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            errorMessage = $"Error deleting record: {ex.Message}";
         }
     }
 }
