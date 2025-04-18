@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BlazorDesktop.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 public class ApplicationDbContext : DbContext
@@ -12,4 +13,13 @@ public class ApplicationDbContext : DbContext
     // Define DbSets for your tables (entities)
     public DbSet<Instructor> Instructors { get; set; }
 
+    public DbSet<Student> Students { get; set; }
+
+    public DbSet<Class> Classes { get; set; }
+
+    public DbSet<AttendanceRecord> AttendanceRecords { get; set; }
+
+
+    public DbSet<QuizBank> QuizBanks { get; set; }
+    public DbSet<QuizQuestion> QuizQuestions { get; set; }
 }

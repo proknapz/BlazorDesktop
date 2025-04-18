@@ -1,0 +1,182 @@
+@page "/quizbanks/details/{QuizBankId:int}"
+@inject ApplicationDbContext Db
+@inject NavigationManager Navigation
+@using BlazorDesktop.Models
+
+<h3>Quiz Bank Details</h3>
+
+@if (quizBank == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h4>@quizBank.Title</h4>
+    <h5>Questions (@quizBank.Questions.Count/3)</h5>
+
+    <ul>
+        @foreach (var question in quizBank.Questions)
+        {
+            <li>
+                @if (editingQuestionId == question.QuizQuestionId)
+                {
+                    <EditForm Model="@editQuestion" OnValidSubmit="UpdateQuestion">
+                        <InputTextArea class="form-control mb-2" @bind-Value="editQuestion.QuestionText" />
+                        <InputText class="form-control mb-2" @bind-Value="editQuestion.OptionA" />
+                        <InputText class="form-control mb-2" @bind-Value="editQuestion.OptionB" />
+                        <InputText class="form-control mb-2" @bind-Value="editQuestion.OptionC" />
+                        <InputText class="form-control mb-2" @bind-Value="editQuestion.OptionD" />
+                        <select class="form-control mb-2" @bind="editQuestion.CorrectAnswer">
+                            <option value="1">Option A</option>
+                            <option value="2">Option B</option>
+                            <option value="3">Option C</option>
+                            <option value="4">Option D</option>
+                        </select>
+                        <button class="btn btn-primary me-2" type="submit">Save</button>
+                        <button class="btn btn-secondary" @onclick="CancelEdit">Cancel</button>
+                    </EditForm>
+                }
+                else
+                {
+                    <strong>@question.QuestionText</strong>
+                    <ul>
+                        <li>A: @question.OptionA</li>
+                        <li>B: @question.OptionB</li>
+                        <li>C: @question.OptionC</li>
+                        <li>D: @question.OptionD</li>
+                        <li><strong>Correct:</strong> @GetOptionLetter(question.CorrectAnswer)</li>
+                    </ul>
+                    <button class="btn btn-sm btn-warning me-1" @onclick="() => StartEdit(question)">Edit</button>
+                    <button class="btn btn-sm btn-danger" @onclick="() => DeleteQuestion(question)">Delete</button>
+                }
+            </li>
+        }
+    </ul>
+
+    @if (quizBank.Questions.Count < 3)
+    {
+        <h5>Add New Question</h5>
+        <EditForm Model="@newQuestion" OnValidSubmit="AddQuestion">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <InputTextArea class="form-control mb-2" @bind-Value="newQuestion.QuestionText" placeholder="Question text" />
+            <InputText class="form-control mb-2" @bind-Value="newQuestion.OptionA" placeholder="Option A" />
+            <InputText class="form-control mb-2" @bind-Value="newQuestion.OptionB" placeholder="Option B" />
+            <InputText class="form-control mb-2" @bind-Value="newQuestion.OptionC" placeholder="Option C" />
+            <InputText class="form-control mb-2" @bind-Value="newQuestion.OptionD" placeholder="Option D" />
+            <select class="form-control mb-2" @bind="newQuestion.CorrectAnswer">
+                <option value="1">Option A</option>
+                <option value="2">Option B</option>
+                <option value="3">Option C</option>
+                <option value="4">Option D</option>
+            </select>
+            <button type="submit" class="btn btn-success me-2">Add Question</button>
+        </EditForm>
+    }
+    else
+    {
+        <p class="text-muted">Maximum of 3 questions reached.</p>
+    }
+
+    <hr />
+    <button class="btn btn-primary" @onclick='() => Navigation.NavigateTo("/quizbanks")'>Save & Finish</button>
+    <button class="btn btn-danger" @onclick="DeleteQuizBank">Delete Quiz Bank</button>
+}
+
+@code {
+    [Parameter]
+    public int QuizBankId { get; set; }
+
+    private QuizBank quizBank;
+    private QuizQuestion newQuestion = new();
+    private QuizQuestion editQuestion;
+    private int? editingQuestionId = null;
+
+    protected override void OnInitialized()
+    {
+        LoadQuizBank();
+        newQuestion.QuizBankId = QuizBankId;
+    }
+
+    private void LoadQuizBank()
+    {
+        quizBank = Db.QuizBanks
+            .Include(qb => qb.Questions)
+            .FirstOrDefault(qb => qb.QuizBankId == QuizBankId);
+    }
+
+    private void AddQuestion()
+    {
+        if (quizBank.Questions.Count < 3)
+        {
+            Db.QuizQuestions.Add(newQuestion);
+            Db.SaveChanges();
+            Navigation.NavigateTo($"/quizbanks/details/{QuizBankId}", forceLoad: true);
+        }
+    }
+
+    private void StartEdit(QuizQuestion q)
+    {
+        editingQuestionId = q.QuizQuestionId;
+        editQuestion = new QuizQuestion
+        {
+            QuizQuestionId = q.QuizQuestionId,
+            QuizBankId = q.QuizBankId,
+            QuestionText = q.QuestionText,
+            OptionA = q.OptionA,
+            OptionB = q.OptionB,
+            OptionC = q.OptionC,
+            OptionD = q.OptionD,
+            CorrectAnswer = q.CorrectAnswer
+        };
+    }
+
+    private void CancelEdit()
+    {
+        editingQuestionId = null;
+    }
+
+    private void UpdateQuestion()
+    {
+        var question = Db.QuizQuestions.Find(editQuestion.QuizQuestionId);
+        if (question != null)
+        {
+            question.QuestionText = editQuestion.QuestionText;
+            question.OptionA = editQuestion.OptionA;
+            question.OptionB = editQuestion.OptionB;
+            question.OptionC = editQuestion.OptionC;
+            question.OptionD = editQuestion.OptionD;
+            question.CorrectAnswer = editQuestion.CorrectAnswer;
+
+            Db.SaveChanges();
+        }
+        editingQuestionId = null;
+        LoadQuizBank();
+    }
+
+    private void DeleteQuestion(QuizQuestion q)
+    {
+        Db.QuizQuestions.Remove(q);
+        Db.SaveChanges();
+        LoadQuizBank();
+    }
+
+    private void DeleteQuizBank()
+    {
+        Db.QuizBanks.Remove(quizBank);
+        Db.SaveChanges();
+        Navigation.NavigateTo("/quizbanks");
+    }
+
+    private string GetOptionLetter(int? correct)
+    {
+        return correct switch
+        {
+            1 => "A",
+            2 => "B",
+            3 => "C",
+            4 => "D",
+            _ => "(None)"
+        };
+    }
+}

@@ -1,61 +1,101 @@
 ﻿@page "/weather"
 
-<h1>Weather</h1>
 
-<p>This component demonstrates showing data.</p>
+<h3>Editable Table (Whole Table Editing)</h3>
 
-@if (forecasts == null)
+<button class="btn btn-primary mb-2" @onclick="ToggleEdit">
+    @(isEditing ? "Cancel" : "Edit")
+</button>
+@if (isEditing)
 {
-    <p><em>Loading...</em></p>
+    <button class="btn btn-success mb-2 ms-2" @onclick="SaveChanges">Save</button>
 }
-else
-{
-    <table class="table">
-        <thead>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < people.Count; i++)
+        {
             <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <td>
+                    @if (isEditing)
+                    {
+                        <input class="form-control"
+                               @bind="editablePeople[i].Name" />
+                    }
+                    else
+                    {
+                        @people[i].Name
+                    }
+                </td>
+                <td>
+                    @if (isEditing)
+                    {
+                        <input class="form-control"
+                               type="number"
+                               @bind="editablePeople[i].Age" />
+                    }
+                    else
+                    {
+                        @people[i].Age
+                    }
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var forecast in forecasts)
-            {
-                <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+        }
+    </tbody>
+</table>
 
 @code {
-    private WeatherForecast[]? forecasts;
+    private bool isEditing = false;
 
-    protected override async Task OnInitializedAsync()
+    private List<Person> people = new()
     {
-        // Simulate asynchronous loading to demonstrate a loading indicator
-        await Task.Delay(500);
+        new Person { Id = 1, Name = "Alice", Age = 30 },
+        new Person { Id = 2, Name = "Bob", Age = 25 },
+        new Person { Id = 3, Name = "Charlie", Age = 35 }
+    };
 
-        var startDate = DateOnly.FromDateTime(DateTime.Now);
-        var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
-        forecasts = Enumerable.Range(1, 5).Select(index => new WeatherForecast
+    private List<Person> editablePeople = new();
+
+    void ToggleEdit()
+    {
+        if (!isEditing)
         {
-            Date = startDate.AddDays(index),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = summaries[Random.Shared.Next(summaries.Length)]
-        }).ToArray();
+            // Deep copy the list to editablePeople
+            editablePeople = people.Select(p => new Person
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Age = p.Age
+            }).ToList();
+        }
+
+        isEditing = !isEditing;
     }
 
-    private class WeatherForecast
+    void SaveChanges()
     {
-        public DateOnly Date { get; set; }
-        public int TemperatureC { get; set; }
-        public string? Summary { get; set; }
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+        // Save changes back to original list
+        people = editablePeople.Select(p => new Person
+        {
+            Id = p.Id,
+            Name = p.Name,
+            Age = p.Age
+        }).ToList();
+
+        isEditing = false;
+    }
+
+    public class Person
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = "";
+        public int Age { get; set; }
     }
 }
+

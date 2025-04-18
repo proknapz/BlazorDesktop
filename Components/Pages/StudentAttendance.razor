@@ -1,93 +1,196 @@
 ﻿@page "/StudentAttendance"
 @inject NavigationManager NavigationManager
+@inject ApplicationDbContext DbContext
+@using Microsoft.EntityFrameworkCore
 
-<h1>Student Attendance</h1>
+<style>
+    .class-button {
+        background-color: white;
+        color: black;
+        border: 1px solid #ccc;
+        margin: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        transition: background-color 0.2s ease-in-out;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 
-<p>This component demonstrates showing data.</p>
+        .class-button:hover {
+            background-color: #f0f0f0;
+        }
 
-<button class="btn btn-primary mb-3" @onclick="ShowAddClassForm">Add a Class</button>
+    .button-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
 
-<!-- Modal for adding a new class -->
-@if (showModal)
+    .marked-for-deletion {
+        text-decoration: line-through;
+        color: gray;
+        background-color: #f9f9f9;
+    }
+</style>
+
+<h3>Select a Class</h3>
+
+@if (!string.IsNullOrEmpty(errorMessage))
 {
-        <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Add Class</h5>
-                        <button type="button" class="btn-close" @onclick="CloseModal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="text" class="form-control form-control-sm mb-2" placeholder="Class Name"
-                               @bind="newClassName" />
-                        <input type="text" class="form-control form-control-sm" placeholder="Class Number"
-                               @bind="newClassNumber" />
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary btn-sm" @onclick="CloseModal">Cancel</button>
-                        <button class="btn btn-success btn-sm" @onclick="AddClass">Add</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <p class="text-danger">@errorMessage</p>
+}
+else if (classList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="button-container">
+        @foreach (var c in classList)
+        {
+            <button class="class-button" @onclick="() => LoadAttendanceRecords(c.classId)">
+                @c.courseName - @c.courseNumber
+            </button>
+        }
+    </div>
 }
 
-@if (classes.Any())
+@if (selectedClassId != null)
 {
-        <h6 class="mt-3">Classes:</h6>
-        <div class="d-flex flex-wrap gap-2">
-        @for (int i = 0; i < classes.Count; i++)
-        {
-                    <button class="btn btn-outline-dark btn-sm text-start" style="min-width: 160px; height: 60px;"
-                            @onclick="() => NavigateToEditPage()">
-                        <strong>@classes[i].Name</strong><br />
-                        <small>@classes[i].Number</small>
-                    </button>
-        }
-        </div>
+    var selectedClass = classList?.FirstOrDefault(c => c.classId == selectedClassId);
+    if (selectedClass != null)
+    {
+        <h4 class="mt-4">Attendance Records for @selectedClass.courseName - @selectedClass.courseNumber</h4>
+    }
+
+    @if (attendanceViewList == null)
+    {
+        <p><em>Loading attendance records...</em></p>
+    }
+    else if (!attendanceViewList.Any())
+    {
+        <p>No attendance records found for this class.</p>
+    }
+    else
+    {
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Arrival Time</th>
+                    <th>Is Present</th>
+                    <th>Is Excused</th>
+                    <th>Class Date</th>
+                    <th>Current IP</th>
+                    <th>Delete?</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var row in attendanceViewList)
+                {
+                    <tr class="@(row.MarkedForDeletion ? "marked-for-deletion" : "")">
+                        <td>@row.Record.Student.FirstName @row.Record.Student.LastName</td>
+                        <td>@row.Record.ArrivalTime.ToString(@"hh\:mm\:ss")</td>
+                        <td><input type="checkbox" @bind="row.Record.IsPresent" disabled="@row.MarkedForDeletion" /></td>
+                        <td><input type="checkbox" @bind="row.Record.IsExcused" disabled="@row.MarkedForDeletion" /></td>
+                        <td>@row.Record.ClassDate.ToShortDateString()</td>
+                        <td>@row.Record.CurrentIP</td>
+                        <td>
+                            <input type="checkbox" @bind="row.MarkedForDeletion" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <button class="btn btn-primary mt-3" @onclick="SaveChanges">Save Changes</button>
+    }
 }
 
 @code {
-    private bool showModal = false;
-    private string newClassName = string.Empty;
-    private string newClassNumber = string.Empty;
-
-    private List<ClassEntry> classes = new();
-
-    private class ClassEntry
+    // ViewModel to track each attendance record and its deletion state
+    public class AttendanceViewModel
     {
-        public string Name { get; set; } = string.Empty;
-        public string Number { get; set; } = string.Empty;
+        public AttendanceRecord Record { get; set; } = default!;
+        public bool MarkedForDeletion { get; set; } = false;
     }
 
-    private void ShowAddClassForm()
-    {
-        newClassName = string.Empty;
-        newClassNumber = string.Empty;
-        showModal = true;
-    }
+    private List<Class>? classList;
+    private List<AttendanceViewModel>? attendanceViewList;
+    private string? errorMessage;
+    private int? selectedClassId;
 
-    private void CloseModal()
+    protected override async Task OnInitializedAsync()
     {
-        showModal = false;
-    }
-
-    private void AddClass()
-    {
-        if (!string.IsNullOrWhiteSpace(newClassName))
+        try
         {
-            classes.Add(new ClassEntry
-                {
-                    Name = newClassName,
-                    Number = newClassNumber
-                });
+            classList = await DbContext.Classes.ToListAsync();
         }
-        showModal = false;
+        catch (Exception ex)
+        {
+            errorMessage = $"Error: {ex.Message}";
+        }
     }
 
-    private void NavigateToEditPage()
+    private async Task LoadAttendanceRecords(int classId)
     {
-        // Use NavigationManager to navigate to another page
-        NavigationManager.NavigateTo("/EditClass");
+        selectedClassId = classId;
+        try
+        {
+            var records = await DbContext.AttendanceRecords
+                .Where(a => a.ClassId == classId)
+                .Include(a => a.Student)
+                .ToListAsync();
+
+            attendanceViewList = records.Select(record => new AttendanceViewModel
+                {
+                    Record = record
+                }).ToList();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error loading attendance: {ex.Message}";
+        }
+    }
+
+    private async Task SaveChanges()
+    {
+        try
+        {
+            if (attendanceViewList == null)
+                return;
+
+            var toDelete = attendanceViewList
+                .Where(vm => vm.MarkedForDeletion)
+                .Select(vm => vm.Record)
+                .ToList();
+
+            var toUpdate = attendanceViewList
+                .Where(vm => !vm.MarkedForDeletion)
+                .Select(vm => vm.Record)
+                .ToList();
+
+            if (toDelete.Any())
+            {
+                DbContext.AttendanceRecords.RemoveRange(toDelete);
+            }
+
+            if (toUpdate.Any())
+            {
+                DbContext.AttendanceRecords.UpdateRange(toUpdate);
+            }
+
+            await DbContext.SaveChangesAsync();
+
+            if (selectedClassId.HasValue)
+            {
+                await LoadAttendanceRecords(selectedClassId.Value);
+            }
+
+            errorMessage = null;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error saving changes: {ex.Message}";
+        }
     }
 }

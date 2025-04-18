@@ -1,0 +1,42 @@
+@page "/quizbanks"
+@inject ApplicationDbContext Db
+
+<h3>Quiz Banks</h3>
+
+<p>
+    <a class="btn btn-primary" href="/quizbanks/create">Create New Quiz Bank</a>
+</p>
+
+@if (quizBanks == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var bank in quizBanks)
+            {
+                <tr>
+                    <td>
+                        <a href="/quizbanks/details/@bank.QuizBankId">@bank.Title</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<QuizBank> quizBanks;
+
+    protected override void OnInitialized()
+    {
+        quizBanks = Db.QuizBanks.ToList();
+    }
+}
