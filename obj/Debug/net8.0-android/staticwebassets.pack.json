@@ -1,32 +1,28 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\obj\\Debug\\net8.0-android\\scopedcss\\bundle\\BlazorDesktop.styles.css",
+      "Id": "C:\\Users\\visha\\source\\repos\\BlazorDesktop\\obj\\Debug\\net8.0-android\\scopedcss\\bundle\\BlazorDesktop.styles.css",
       "PackagePath": "staticwebassets\\BlazorDesktop.styles.css"
     },
     {
-      "Id": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\css\\app.css",
+      "Id": "C:\\Users\\visha\\source\\repos\\BlazorDesktop\\wwwroot\\css\\app.css",
       "PackagePath": "staticwebassets\\css\\app.css"
     },
     {
-      "Id": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "Id": "C:\\Users\\visha\\source\\repos\\BlazorDesktop\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "Id": "C:\\Users\\visha\\source\\repos\\BlazorDesktop\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Id": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\favicon.png",
+      "Id": "C:\\Users\\visha\\source\\repos\\BlazorDesktop\\wwwroot\\favicon.png",
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
-      "Id": "C:\\Users\\Dell\\Source\\Repos\\BlazorDesktop\\wwwroot\\index.html",
+      "Id": "C:\\Users\\visha\\source\\repos\\BlazorDesktop\\wwwroot\\index.html",
       "PackagePath": "staticwebassets\\index.html"
-    },
-    {
-      "Id": "obj\\Debug\\net8.0-android\\staticwebassets\\msbuild.BlazorDesktop.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
-      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
       "Id": "obj\\Debug\\net8.0-android\\staticwebassets\\msbuild.BlazorDesktop.Microsoft.AspNetCore.StaticWebAssets.props",

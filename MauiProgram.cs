@@ -28,6 +28,10 @@ namespace BlazorDesktop
                 options.UseMySql("Server=localhost;Port=3306;Database=attendanceproject;User=root;Password=root;",
                 ServerVersion.AutoDetect("Server=localhost;Port=3306;Database=attendanceproject;User=root;Password=root;")));
 
+            builder.Services.AddScoped(sp => new HttpClient
+            {
+                BaseAddress = new Uri("https://localhost:5001/") // Or your API URL
+            });
 
 
             return builder.Build();

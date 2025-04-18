@@ -1,15 +1,15 @@
 ﻿@page "/Importcsv"
 @inject IJSRuntime JSRuntime
-@* written by omar khan 4/6/2025 OLK200000*@
+@using MySql.Data.MySqlClient
+@* written by vishal koundinya 4/17/2025 vrk200000 *@
 <h3>Import CSV Data</h3>
 <div class="container">
     <div class="form-group">
         <button class="btn btn-primary" @onclick="SelectFile">Browse</button>
         <span>@filePath</span>
     </div>
-
     <div class="form-group">
-        <button class="btn btn-success" @onclick="HandleCsvImport" disabled="@isImportButtonDisabled">Import</button>
+        <button class="btn btn-success" @onclick="csvtoDB" disabled="@Importbutton">Import</button>
     </div>
 
     <div class="form-group">
@@ -17,8 +17,7 @@
         <span class="status-message">@statusMessage</span>
     </div>
 
-    @if (csvData != null && csvData.Count > 0)
-    {
+    @if (csvData != null && csvData.Count > 0){
         <table class="table">
             <thead>
                 <tr>
@@ -32,8 +31,7 @@
                 @foreach (var row in csvData)
                 {
                     <tr>
-                        @foreach (var value in row.Values)
-                        {
+                        @foreach (var value in row.Values){
                             <td>@value</td>
                         }
                     </tr>
@@ -41,93 +39,186 @@
             </tbody>
         </table>
     }
+    <hr />
+    <h4>Manual Student Entry</h4>
+    <div class="form-group">
+        <label>Student ID:</label>
+        <input class="form-control" @bind="manualStudent.studentId" />
+    </div>
+    <div class="form-group">
+        <label>UTD ID:</label>
+        <input class="form-control" @bind="manualStudent.utdID" />
+    </div>
+    <div class="form-group">
+        <label>NetID:</label>
+        <input class="form-control" @bind="manualStudent.netID" />
+    </div>
+    <div class="form-group">
+        <label>First Name:</label>
+        <input class="form-control" @bind="manualStudent.firstName" />
+    </div>
+    <div class="form-group">
+        <label>Last Name:</label>
+        <input class="form-control" @bind="manualStudent.lastName" />
+    </div>
+
+    
+    <div class="form-group mt-2">
+        <button class="btn btn-secondary" @onclick="InsertManualStudent">Submit Manual Entry</button>
+    </div>
 </div>
 
 @code {
     private string filePath = string.Empty;
     private string statusMessage = "No file selected.";
-    private bool isImportButtonDisabled = true;
-    private List<Dictionary<string, string>> csvData = null;  // To hold the parsed CSV data
-
+    private bool Importbutton = true;
+    private List<Dictionary<string, string>> csvData = null;  
+    private Student manualStudent = new Student();
     private async Task SelectFile()
     {
-        // Call JavaScript function to select and read file
-        var fileContent = await JSRuntime.InvokeAsync<string>("selectAndReadFile");
-
-        if (string.IsNullOrEmpty(fileContent))
+        try
         {
-            statusMessage = "Failed to read the file.";
-            return;
+            var fileContent = await JSRuntime.InvokeAsync<string>("selectAndReadFile");
+            if (string.IsNullOrEmpty(fileContent))
+            {
+                statusMessage = "Failed to read the file.";
+                return;
+            }
+            csvData = parseCsv(fileContent);
+            filePath = "File Selected";
+            Importbutton = false;
+            statusMessage = "CSV loaded.";
         }
-
-        // Parse CSV content into a list of dictionaries (each row is a dictionary of column name -> value)
-        csvData = ParseCsv(fileContent);
-        filePath = "File Selected";  // Indicate file was selected
-        isImportButtonDisabled = false;  // Enable the "Import" button
-        statusMessage = "CSV Imported Successfully!";
+        catch (Exception ex)
+        {
+            statusMessage = $"SelectFile error: {ex.Message}";
+        }
     }
-
-    private List<Dictionary<string, string>> ParseCsv(string csvContent)
+    // Parses the CSV 
+    private List<Dictionary<string, string>> parseCsv(string csvContent)
     {
         var rows = new List<Dictionary<string, string>>();
         var lines = csvContent.Split('\n');
-
         if (lines.Length == 0)
             return rows;
-
         var headers = lines[0].Split(',');
-
         for (int i = 1; i < lines.Length; i++)
         {
             var row = new Dictionary<string, string>();
-            var cells = lines[i].Split(',');
-
+            var section = lines[i].Split(',');
             for (int j = 0; j < headers.Length; j++)
             {
-                if (j < cells.Length)
-                    row[headers[j]] = cells[j].Trim();
+                if (j < section.Length)
+                    row[headers[j].Trim()] = section[j].Trim();
             }
-
             if (row.Count > 0)
                 rows.Add(row);
         }
-
         return rows;
     }
-
-    // Renamed from ImportCsv to HandleCsvImport to avoid conflict with the 'ImportCsv' type error
-    private async Task HandleCsvImport()
+    private async Task csvtoDB()
     {
-        // If file has already been processed by SelectFile, it's ready to import/display
-        statusMessage = "CSV Imported Successfully!";
+        if (csvData == null || csvData.Count == 0)
+        {
+            statusMessage = "No CSV data to import.";
+            return;
+        }
+        var students = csvData.Select(row => new Student
+            {
+                studentId = row.GetValueOrDefault("studentId"),
+                utdID = row.GetValueOrDefault("utdID"),
+                netID = row.GetValueOrDefault("netID"),
+                firstName = row.GetValueOrDefault("firstName"),
+                lastName = row.GetValueOrDefault("lastName")
+            }).ToList();
+        try
+        {
+            //connection to the DB for the import csv
+            string connectStr = "Server=localhost;Port=3306;Database=attendanceproject;User=root;Password=root;";
+            using var connect = new MySqlConnection(connectStr);
+            await connect.OpenAsync();
+            //puts students into DB in the student table
+            foreach (var stu in students)
+            {
+                var sqlcom = new MySqlCommand("INSERT INTO student (studentID, utdID, netID, lastName, firstName) VALUES (@id, @utd, @net, @last, @first)", connect);
+                sqlcom.Parameters.AddWithValue("@id", stu.studentId);
+                sqlcom.Parameters.AddWithValue("@utd", stu.utdID);
+                sqlcom.Parameters.AddWithValue("@net", stu.netID);
+                sqlcom.Parameters.AddWithValue("@last", stu.lastName);
+                sqlcom.Parameters.AddWithValue("@first", stu.firstName);
+                await sqlcom.ExecuteNonQueryAsync();}
+            statusMessage = $"Imported {students.Count} students successfully.";
+        }
+        catch (Exception ex){
+            statusMessage = $"DB insert error: {ex.Message}";}
+    }
+    //manual entry for each section of the table
+    private async Task InsertManualStudent(){
+        if (string.IsNullOrWhiteSpace(manualStudent.studentId) ||
+            string.IsNullOrWhiteSpace(manualStudent.utdID) ||
+            string.IsNullOrWhiteSpace(manualStudent.netID) ||
+            string.IsNullOrWhiteSpace(manualStudent.firstName) ||
+            string.IsNullOrWhiteSpace(manualStudent.lastName))
+        {
+            statusMessage = "All fields are required for manual entry.";
+            return;
+        }
+        try
+        {
+            //connection to DB for manual entries 
+            string connectStr = "Server=localhost;Port=3306;Database=attendanceproject;User=root;Password=root;";
+            using var connect = new MySqlConnection(connectStr);
+            await connect.OpenAsync();
+ 
+            var sqlcom = new MySqlCommand("INSERT INTO student (studentID, utdID, netID, lastName, firstName) VALUES (@id, @utd, @net, @last, @first)", connect);
+            sqlcom.Parameters.AddWithValue("@id", manualStudent.studentId);
+            sqlcom.Parameters.AddWithValue("@utd", manualStudent.utdID);
+            sqlcom.Parameters.AddWithValue("@net", manualStudent.netID);
+            sqlcom.Parameters.AddWithValue("@last", manualStudent.lastName);
+            sqlcom.Parameters.AddWithValue("@first", manualStudent.firstName);
+            await sqlcom.ExecuteNonQueryAsync();
+
+            statusMessage = $"Student {manualStudent.netID} added manually.";
+            manualStudent = new Student(); // Reset form
+        }
+        catch (Exception ex)
+        {
+            statusMessage = $"Manual insert error: {ex.Message}";
+        }
+    }
+    public class Student
+    {
+        public string studentId { get; set; }
+        public string utdID { get; set; }
+        public string netID { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
     }
 }
 
-
+// JS function for file upload
 <script>
     window.selectAndReadFile = async () => {
         const input = document.createElement("input");
         input.type = "file";
-        input.accept = ".txt";  // Optionally, filter for CSV files
-
+        input.accept = ".csv";
         return new Promise((resolve, reject) => {
             input.onchange = (e) => {
                 const file = e.target.files[0];
                 if (file) {
                     const reader = new FileReader();
                     reader.onload = (event) => {
-                        resolve(event.target.result);  // Return file content
+                        resolve(event.target.result);
                     };
                     reader.onerror = (error) => {
                         reject(error);
                     };
                     reader.readAsText(file);
                 } else {
-                    resolve(null);  // Return null if no file is selected
+                    resolve(null);
                 }
             };
             input.click();
         });
     };
 </script>
-
