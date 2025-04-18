@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BlazorDesktop.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 public class ApplicationDbContext : DbContext
@@ -15,4 +16,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<Class> Classes { get; set; }
 
     public DbSet<AttendanceRecord> AttendanceRecords { get; set; }
+
+
+    public DbSet<QuizBank> QuizBanks { get; set; }
+    public DbSet<QuizQuestion> QuizQuestions { get; set; }
 }
