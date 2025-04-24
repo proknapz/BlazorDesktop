@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-
 
 namespace BlazorDesktop
 {
@@ -21,14 +19,14 @@ namespace BlazorDesktop
             builder.Services.AddMauiBlazorWebView();
 
 #if DEBUG
-    		builder.Services.AddBlazorWebViewDeveloperTools();
-    		builder.Logging.AddDebug();
+            builder.Services.AddBlazorWebViewDeveloperTools();
+            builder.Logging.AddDebug();
 #endif
+
+         
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySql("Server=localhost;Port=3306;Database=attendanceproject;User=root;Password=root;",
                 ServerVersion.AutoDetect("Server=localhost;Port=3306;Database=attendanceproject;User=root;Password=root;")));
-
-
 
             return builder.Build();
         }
