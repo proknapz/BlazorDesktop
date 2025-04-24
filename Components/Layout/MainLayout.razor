@@ -1,9 +1,17 @@
 ﻿@inherits LayoutComponentBase
+@inject NavigationManager Navigation
+
+@code {
+    private bool IsLoginPage => Navigation.Uri.EndsWith("/");
+}
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+    @if (!IsLoginPage)
+    {
+        <div class="sidebar">
+            <NavMenu />
+        </div>
+    }
 
     <main>
         <div class="top-row px-4">

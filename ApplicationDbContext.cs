@@ -16,5 +16,7 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Class> Classes { get; set; }
 
+    public DbSet<Config> Configs { get; set; }
+
     public DbSet<AttendanceRecord> AttendanceRecords { get; set; }
 }

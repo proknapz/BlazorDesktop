@@ -8,4 +8,6 @@ public class Instructor
     public string LastName { get; set; }
     public string Email { get; set; }
     public string Username { get; set; } // Note: In a real-world scenario, you'd want to hash this
+
+    public string Password { get; set; }
 }
