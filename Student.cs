@@ -24,7 +24,5 @@ public class Student
     [StringLength(255)]
     public string FirstName { get; set; }
 
-    [Required]
-    [StringLength(45)]
-    public string Password { get; set; } // Password (should be hashed in production)
+
 }

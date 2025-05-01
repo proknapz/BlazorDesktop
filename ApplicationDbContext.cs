@@ -22,4 +22,9 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<QuizBank> QuizBanks { get; set; }
     public DbSet<QuizQuestion> QuizQuestions { get; set; }
+
+
+    public DbSet<QuizSession> QuizSessions { get; set; }
+
 }
+
