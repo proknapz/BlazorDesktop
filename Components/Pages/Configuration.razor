@@ -1,0 +1,53 @@
+﻿@page "/Config"
+@using Microsoft.EntityFrameworkCore
+@inject ApplicationDbContext DbContext
+
+<h1>Configuration Settings</h1>
+
+@if (config == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h3>Config Data</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Database Location</th>
+                <th>Database Name</th>
+                <th>Quiz Duration</th>
+                <th>Class Password</th>
+                <th>Class Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@config.Id</td>
+                <td>@config.Class?.courseName (@config.Class?.courseNumber)</td>
+                <td>@config.dbLocation</td>
+                <td>@config.dbName</td>
+                <td>@config.QuizDuration</td>
+                <td>@config.CurrentClassPW</td>
+            </tr>
+        </tbody>
+    </table>
+}
+
+@code {
+    private Config? config;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            config = await DbContext.Configs.Include(c => c.Class).FirstOrDefaultAsync();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading config: {ex.Message}");
+            config = null;
+        }
+    }
+}

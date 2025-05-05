@@ -1,0 +1,99 @@
+﻿@page "/studentlist"
+@inject ApplicationDbContext DbContext
+
+<h3>Available Classes</h3>
+
+@if (classes == null)
+{
+    <p>Loading classes...</p>
+}
+else
+{
+    @foreach (var cls in classes)
+    {
+        <button @onclick="@(() => OnClassSelected(cls.classId))" class="class-button">
+            @cls.courseName (@cls.courseNumber)
+        </button>
+    }
+}
+@if (selectedClassId.HasValue)
+{
+    <h4>Students in @selectedClassName</h4>
+
+    @if (students == null)
+    {
+        <p>Loading students...</p>
+    }
+    else if (!students.Any())
+    {
+        <p>No students enrolled in this class.</p>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>UTD ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var student in students)
+                {
+                    <tr>
+                        <td>@student.firstName</td>
+                        <td>@student.lastName</td>
+                        <td>@student.utdID</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+
+
+
+<style>
+    .class-button {
+        background-color: white;
+        color: black;
+        border: 1px solid #ccc;
+        padding: 10px 15px;
+        margin: 5px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .class-button:hover {
+            background-color: #f2f2f2;
+        }
+</style>
+
+@code {
+    private List<Class> classes;
+    private List<Student> students;
+    private int? selectedClassId;
+    private string selectedClassName;
+
+    protected override async Task OnInitializedAsync()
+    {
+        classes = await DbContext.Classes.ToListAsync();
+    }
+
+    private async Task OnClassSelected(int classId)
+    {
+        selectedClassId = classId;
+
+        var selectedClass = await DbContext.Classes
+            .FirstOrDefaultAsync(c => c.classId == classId);
+
+        selectedClassName = selectedClass?.courseName;
+
+        students = await DbContext.Students
+            .Where(s => s.classId == classId)
+            .ToListAsync();
+    }
+
+}

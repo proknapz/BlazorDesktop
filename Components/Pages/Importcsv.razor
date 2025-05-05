@@ -1,15 +1,19 @@
 ﻿@page "/Importcsv"
 @inject IJSRuntime JSRuntime
-@* written by omar khan 4/5/2024*@
+@inject ApplicationDbContext Db
+@using BlazorDesktop
+@using BlazorDesktop.Components.Pages
+
 <h3>Import CSV Data</h3>
+
 <div class="container">
     <div class="form-group">
         <button class="btn btn-primary" @onclick="SelectFile">Browse</button>
-        <span>@filePath</span>
+        <span class="ml-2">@filePath</span>
     </div>
 
     <div class="form-group">
-        <button class="btn btn-success" @onclick="HandleCsvImport" disabled="@isImportButtonDisabled">Import</button>
+        <button class="btn btn-success" @onclick="ImportFromCsv" disabled="@Importbutton">Import</button>
     </div>
 
     <div class="form-group">
@@ -19,115 +23,196 @@
 
     @if (csvData != null && csvData.Count > 0)
     {
-        <table class="table">
-            <thead>
-                <tr>
-                    @foreach (var header in csvData[0].Keys)
-                    {
-                        <th>@header</th>
-                    }
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var row in csvData)
-                {
+            <p><strong>Preview:</strong> Showing first 5 rows</p>
+            <table class="table table-bordered table-sm">
+                <thead>
                     <tr>
-                        @foreach (var value in row.Values)
+                        @foreach (var header in csvData[0].Keys)
                         {
-                            <td>@value</td>
+                                <th>@header</th>
                         }
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var row in csvData.Take(5))
+                    {
+                            <tr>
+                                @foreach (var value in row.Values)
+                                {
+                                        <td>@value</td>
+                                }
+                            </tr>
+                    }
+                </tbody>
+            </table>
     }
+
+    <hr />
+    <Manualstudentimport />
 </div>
 
 @code {
     private string filePath = string.Empty;
     private string statusMessage = "No file selected.";
-    private bool isImportButtonDisabled = true;
-    private List<Dictionary<string, string>> csvData = null;  // To hold the parsed CSV data
+    private bool Importbutton = true;
+    private List<Dictionary<string, string>> csvData = null;
+
+    private readonly string[] requiredHeaders = new[]
+    {
+        "studentId", "utdID", "firstName", "lastName", "classId", "instructorId"
+    };
 
     private async Task SelectFile()
     {
-        // Call JavaScript function to select and read file
-        var fileContent = await JSRuntime.InvokeAsync<string>("selectAndReadFile");
-
-        if (string.IsNullOrEmpty(fileContent))
+        try
         {
-            statusMessage = "Failed to read the file.";
-            return;
-        }
+            var fileContent = await JSRuntime.InvokeAsync<string>("selectAndReadFile");
 
-        // Parse CSV content into a list of dictionaries (each row is a dictionary of column name -> value)
-        csvData = ParseCsv(fileContent);
-        filePath = "File Selected";  // Indicate file was selected
-        isImportButtonDisabled = false;  // Enable the "Import" button
-        statusMessage = "CSV Imported Successfully!";
+            if (string.IsNullOrWhiteSpace(fileContent))
+            {
+                statusMessage = "No file selected or file is empty.";
+                return;
+            }
+
+            csvData = ParseCsv(fileContent);
+
+            if (csvData.Count == 0)
+            {
+                statusMessage = "CSV has no valid rows.";
+                return;
+            }
+
+            var csvHeaders = csvData[0].Keys.Select(k => k.Trim()).ToHashSet(StringComparer.OrdinalIgnoreCase);
+            var missing = requiredHeaders.Where(r => !csvHeaders.Contains(r)).ToList();
+
+            if (missing.Any())
+            {
+                statusMessage = $"Missing required header(s): {string.Join(", ", missing)}.";
+                csvData = null;
+                return;
+            }
+
+            filePath = "File selected successfully.";
+            Importbutton = false;
+            statusMessage = $"CSV loaded with {csvData.Count} row(s).";
+        }
+        catch (JSException jsEx)
+        {
+            statusMessage = $"JavaScript error: {jsEx.Message}";
+        }
+        catch (Exception ex)
+        {
+            statusMessage = $"SelectFile error: {ex.Message}";
+        }
     }
 
     private List<Dictionary<string, string>> ParseCsv(string csvContent)
     {
         var rows = new List<Dictionary<string, string>>();
-        var lines = csvContent.Split('\n');
-
-        if (lines.Length == 0)
-            return rows;
-
-        var headers = lines[0].Split(',');
-
-        for (int i = 1; i < lines.Length; i++)
+        try
         {
-            var row = new Dictionary<string, string>();
-            var cells = lines[i].Split(',');
+            var lines = csvContent.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+            if (lines.Length < 2) return rows;
 
-            for (int j = 0; j < headers.Length; j++)
+            var headers = lines[0].Split(',').Select(h => h.Trim()).ToArray();
+
+            for (int i = 1; i < lines.Length; i++)
             {
-                if (j < cells.Length)
-                    row[headers[j]] = cells[j].Trim();
-            }
+                var section = lines[i].Split(',');
+                if (section.Length != headers.Length) continue;
 
-            if (row.Count > 0)
+                var row = new Dictionary<string, string>();
+                for (int j = 0; j < headers.Length; j++)
+                {
+                    row[headers[j]] = section[j].Trim();
+                }
+
                 rows.Add(row);
+            }
+        }
+        catch (Exception ex)
+        {
+            statusMessage = $"CSV parse error: {ex.Message}";
         }
 
         return rows;
     }
 
-    // Renamed from ImportCsv to HandleCsvImport to avoid conflict with the 'ImportCsv' type error
-    private async Task HandleCsvImport()
+    private async Task ImportFromCsv()
     {
-        // If file has already been processed by SelectFile, it's ready to import/display
-        statusMessage = "CSV Imported Successfully!";
+        if (csvData == null || csvData.Count == 0)
+        {
+            statusMessage = "No CSV data to import.";
+            return;
+        }
+
+        try
+        {
+            var validClassIds = await Db.Classes.Select(c => c.classId).ToListAsync();
+
+            var students = csvData.Select(row =>
+            {
+                string rawClassId = row.GetValueOrDefault("classId")?.Trim();
+                int parsedClassId = int.TryParse(rawClassId, out var cid) ? cid : -1;
+
+                return new Student
+                {
+                    studentId = int.TryParse(row.GetValueOrDefault("studentId"), out var sid) ? sid : 0,
+                    utdID = row.GetValueOrDefault("utdID")?.Trim(),
+                    firstName = row.GetValueOrDefault("firstName")?.Trim(),
+                    lastName = row.GetValueOrDefault("lastName")?.Trim(),
+                    classId = parsedClassId,
+                    instructorId = int.TryParse(row.GetValueOrDefault("instructorId"), out var iid) ? iid : 0
+                };
+            })
+            .Where(s => validClassIds.Contains(s.classId))
+            .ToList();
+
+            var unmatchedCount = csvData.Count - students.Count;
+
+            foreach (var student in students)
+            {
+                var existing = await Db.Students.FindAsync(student.studentId);
+                if (existing != null)
+                {
+                    Db.Entry(existing).CurrentValues.SetValues(student);
+                }
+                else
+                {
+                    Db.Students.Add(student);
+                }
+            }
+
+            await Db.SaveChangesAsync();
+            statusMessage = $"Imported or updated {students.Count} student(s) successfully. " +
+                            $"{unmatchedCount} row(s) skipped due to invalid classId.";
+        }
+        catch (Exception ex)
+        {
+            var inner = ex.InnerException?.Message ?? "No inner exception";
+            statusMessage = $"CSV insert error: {ex.Message} | Inner: {inner}";
+        }
     }
 }
-
-
 <script>
     window.selectAndReadFile = async () => {
         const input = document.createElement("input");
         input.type = "file";
-        input.accept = ".txt";  // Optionally, filter for CSV files
+        input.accept = ".txt";
 
         return new Promise((resolve, reject) => {
             input.onchange = (e) => {
                 const file = e.target.files[0];
                 if (file) {
                     const reader = new FileReader();
-                    reader.onload = (event) => {
-                        resolve(event.target.result);  // Return file content
-                    };
-                    reader.onerror = (error) => {
-                        reject(error);
-                    };
+                    reader.onload = (event) => resolve(event.target.result);
+                    reader.onerror = (error) => reject(error);
                     reader.readAsText(file);
                 } else {
-                    resolve(null);  // Return null if no file is selected
+                    resolve(null);
                 }
             };
             input.click();
         });
     };
 </script>
-
