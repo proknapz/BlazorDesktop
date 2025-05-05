@@ -13,10 +13,6 @@ public class Student
     public string UtdID { get; set; }   // UTD ID, e.g., "1234567890"
 
     [Required]
-    [StringLength(9)]
-    public string NetID { get; set; }   // University NetID
-
-    [Required]
     [StringLength(255)]
     public string LastName { get; set; }
 
