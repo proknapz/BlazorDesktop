@@ -4,14 +4,13 @@
 @using BlazorDesktop
 @using BlazorDesktop.Components.Pages
 
-<h3>Import CSV Data</h3>
 
+<h3>Import CSV Data</h3>
 <div class="container">
     <div class="form-group">
         <button class="btn btn-primary" @onclick="SelectFile">Browse</button>
-        <span class="ml-2">@filePath</span>
+        <span>@filePath</span>
     </div>
-
     <div class="form-group">
         <button class="btn btn-success" @onclick="ImportFromCsv" disabled="@Importbutton">Import</button>
     </div>
@@ -19,12 +18,11 @@
     <div class="form-group">
         <label>Status:</label>
         <span class="status-message">@statusMessage</span>
-    </div>
+    </div>  
 
     @if (csvData != null && csvData.Count > 0)
     {
-            <p><strong>Preview:</strong> Showing first 5 rows</p>
-            <table class="table table-bordered table-sm">
+            <table class="table">
                 <thead>
                     <tr>
                         @foreach (var header in csvData[0].Keys)
@@ -34,7 +32,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var row in csvData.Take(5))
+                    @foreach (var row in csvData)
                     {
                             <tr>
                                 @foreach (var value in row.Values)
@@ -56,85 +54,44 @@
     private string statusMessage = "No file selected.";
     private bool Importbutton = true;
     private List<Dictionary<string, string>> csvData = null;
-
-    private readonly string[] requiredHeaders = new[]
-    {
-        "studentId", "utdID", "firstName", "lastName", "classId", "instructorId"
-    };
-
     private async Task SelectFile()
     {
         try
         {
             var fileContent = await JSRuntime.InvokeAsync<string>("selectAndReadFile");
-
-            if (string.IsNullOrWhiteSpace(fileContent))
+            if (string.IsNullOrEmpty(fileContent))
             {
-                statusMessage = "No file selected or file is empty.";
+                statusMessage = "Failed to read the file.";
                 return;
             }
-
-            csvData = ParseCsv(fileContent);
-
-            if (csvData.Count == 0)
-            {
-                statusMessage = "CSV has no valid rows.";
-                return;
-            }
-
-            var csvHeaders = csvData[0].Keys.Select(k => k.Trim()).ToHashSet(StringComparer.OrdinalIgnoreCase);
-            var missing = requiredHeaders.Where(r => !csvHeaders.Contains(r)).ToList();
-
-            if (missing.Any())
-            {
-                statusMessage = $"Missing required header(s): {string.Join(", ", missing)}.";
-                csvData = null;
-                return;
-            }
-
-            filePath = "File selected successfully.";
+            csvData = parseCsv(fileContent);
+            filePath = "File Selected";
             Importbutton = false;
-            statusMessage = $"CSV loaded with {csvData.Count} row(s).";
-        }
-        catch (JSException jsEx)
-        {
-            statusMessage = $"JavaScript error: {jsEx.Message}";
+            statusMessage = "CSV loaded.";
         }
         catch (Exception ex)
         {
             statusMessage = $"SelectFile error: {ex.Message}";
         }
     }
-
-    private List<Dictionary<string, string>> ParseCsv(string csvContent)
+    private List<Dictionary<string, string>> parseCsv(string csvContent)
     {
         var rows = new List<Dictionary<string, string>>();
-        try
+        var lines = csvContent.Split('\n');
+        if (lines.Length == 0) return rows;
+
+        var headers = lines[0].Split(',');
+        for (int i = 1; i < lines.Length; i++)
         {
-            var lines = csvContent.Split('\n', StringSplitOptions.RemoveEmptyEntries);
-            if (lines.Length < 2) return rows;
-
-            var headers = lines[0].Split(',').Select(h => h.Trim()).ToArray();
-
-            for (int i = 1; i < lines.Length; i++)
+            var row = new Dictionary<string, string>();
+            var section = lines[i].Split(',');
+            for (int j = 0; j < headers.Length; j++)
             {
-                var section = lines[i].Split(',');
-                if (section.Length != headers.Length) continue;
-
-                var row = new Dictionary<string, string>();
-                for (int j = 0; j < headers.Length; j++)
-                {
-                    row[headers[j]] = section[j].Trim();
-                }
-
-                rows.Add(row);
+                if (j < section.Length)
+                    row[headers[j].Trim()] = section[j].Trim();
             }
+            if (row.Count > 0) rows.Add(row);
         }
-        catch (Exception ex)
-        {
-            statusMessage = $"CSV parse error: {ex.Message}";
-        }
-
         return rows;
     }
 
@@ -146,46 +103,44 @@
             return;
         }
 
+        // 🔍 Get valid classIds from the database to filter invalid rows
+        var validClassIds = await Db.Classes.Select(c => c.classId).ToListAsync();
+
+        // 🧠 Convert and filter students with valid classId only
+        var students = csvData.Select(row =>
+        {
+            int parsedClassId = int.TryParse(row.GetValueOrDefault("classId")?.Trim(), out var cid) ? cid : -1;
+
+            return new Student
+            {
+                studentId = int.TryParse(row.GetValueOrDefault("studentId")?.Trim(), out var sid) ? sid : 0,
+                utdID = row.GetValueOrDefault("utdID")?.Trim(),
+                firstName = row.GetValueOrDefault("firstName")?.Trim(),
+                lastName = row.GetValueOrDefault("lastName")?.Trim(),
+                classId = parsedClassId,
+                instructorId = int.TryParse(row.GetValueOrDefault("instructorId")?.Trim(), out var instId) ? instId : 0
+            };
+        })
+        .Where(s => validClassIds.Contains(s.classId)) // ✅ Only valid foreign keys
+        .ToList();
+
         try
         {
-            var validClassIds = await Db.Classes.Select(c => c.classId).ToListAsync();
-
-            var students = csvData.Select(row =>
-            {
-                string rawClassId = row.GetValueOrDefault("classId")?.Trim();
-                int parsedClassId = int.TryParse(rawClassId, out var cid) ? cid : -1;
-
-                return new Student
-                {
-                    studentId = int.TryParse(row.GetValueOrDefault("studentId"), out var sid) ? sid : 0,
-                    utdID = row.GetValueOrDefault("utdID")?.Trim(),
-                    firstName = row.GetValueOrDefault("firstName")?.Trim(),
-                    lastName = row.GetValueOrDefault("lastName")?.Trim(),
-                    classId = parsedClassId,
-                    instructorId = int.TryParse(row.GetValueOrDefault("instructorId"), out var iid) ? iid : 0
-                };
-            })
-            .Where(s => validClassIds.Contains(s.classId))
-            .ToList();
-
-            var unmatchedCount = csvData.Count - students.Count;
-
             foreach (var student in students)
             {
                 var existing = await Db.Students.FindAsync(student.studentId);
                 if (existing != null)
                 {
-                    Db.Entry(existing).CurrentValues.SetValues(student);
+                    Db.Entry(existing).CurrentValues.SetValues(student); // update
                 }
                 else
                 {
-                    Db.Students.Add(student);
+                    Db.Students.Add(student); // insert
                 }
             }
 
             await Db.SaveChangesAsync();
-            statusMessage = $"Imported or updated {students.Count} student(s) successfully. " +
-                            $"{unmatchedCount} row(s) skipped due to invalid classId.";
+            statusMessage = $"Imported or updated {students.Count} student(s) successfully.";
         }
         catch (Exception ex)
         {
@@ -198,15 +153,18 @@
     window.selectAndReadFile = async () => {
         const input = document.createElement("input");
         input.type = "file";
-        input.accept = ".txt";
-
+        input.accept = ".csv";
         return new Promise((resolve, reject) => {
             input.onchange = (e) => {
                 const file = e.target.files[0];
                 if (file) {
                     const reader = new FileReader();
-                    reader.onload = (event) => resolve(event.target.result);
-                    reader.onerror = (error) => reject(error);
+                    reader.onload = (event) => {
+                        resolve(event.target.result);
+                    };
+                    reader.onerror = (error) => {
+                        reject(error);
+                    };
                     reader.readAsText(file);
                 } else {
                     resolve(null);
