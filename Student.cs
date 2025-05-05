@@ -5,19 +5,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 [Table("student")]
 public class Student
 {
-    [Key]
-    public int StudentId { get; set; }  // Primary Key, Auto-incremented
+    public int studentId { get; set; }
+    public string utdID { get; set; }
+    public string lastName { get; set; }
+    public string firstName { get; set; }
+    public int classId { get; set; }
 
-    [Required]
-    [StringLength(50)]
-    public string UtdID { get; set; }   // UTD ID, e.g., "1234567890"
 
-    [Required]
-    [StringLength(255)]
-    public string LastName { get; set; }
-
-    [Required]
-    [StringLength(255)]
-    public string FirstName { get; set; }
-
+    [Column("instructorID")]
+    public int instructorId { get; set; }
 }

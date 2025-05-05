@@ -88,7 +88,7 @@ else
                 @foreach (var row in attendanceViewList)
                 {
                     <tr class="@(row.MarkedForDeletion ? "marked-for-deletion" : "")">
-                        <td>@row.Record.Student.FirstName @row.Record.Student.LastName</td>
+                        <td>@row.Record.Student.firstName @row.Record.Student.lastName</td>
                         <td>@row.Record.ArrivalTime.ToString(@"hh\:mm\:ss")</td>
                         <td><input type="checkbox" @bind="row.Record.IsPresent" disabled="@row.MarkedForDeletion" /></td>
                         <td><input type="checkbox" @bind="row.Record.IsExcused" disabled="@row.MarkedForDeletion" /></td>
