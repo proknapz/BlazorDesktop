@@ -3,55 +3,28 @@
 @inject ApplicationDbContext DbContext
 @using Microsoft.EntityFrameworkCore
 
-<style>
-    .class-button {
-        background-color: white;
-        color: black;
-        border: 1px solid #ccc;
-        margin: 0.5rem;
-        padding: 0.75rem 1.5rem;
-        transition: background-color 0.2s ease-in-out;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-        .class-button:hover {
-            background-color: #f0f0f0;
-        }
-
-    .button-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-    }
-
-    .marked-for-deletion {
-        text-decoration: line-through;
-        color: gray;
-        background-color: #f9f9f9;
-    }
-</style>
+<link href="css/StudentAttendance.css" rel="stylesheet" />
 
 <h3>Select a Class</h3>
 
 @if (!string.IsNullOrEmpty(errorMessage))
 {
-    <p class="text-danger">@errorMessage</p>
+        <p class="text-danger">@errorMessage</p>
 }
 else if (classList == null)
 {
-    <p><em>Loading...</em></p>
+        <p><em>Loading...</em></p>
 }
 else
 {
-    <div class="button-container">
-        @foreach (var c in classList)
-        {
-            <button class="class-button" @onclick="() => LoadAttendanceRecords(c.classId)">
-                @c.courseName - @c.courseNumber
-            </button>
-        }
-    </div>
+        <div class="button-container">
+            @foreach (var c in classList)
+            {
+                    <button class="class-button" @onclick="() => LoadAttendanceRecords(c.classId)">
+                        @c.courseName - @c.courseNumber
+                    </button>
+            }
+        </div>
 }
 
 @if (selectedClassId != null)
@@ -59,55 +32,61 @@ else
     var selectedClass = classList?.FirstOrDefault(c => c.classId == selectedClassId);
     if (selectedClass != null)
     {
-        <h4 class="mt-4">Attendance Records for @selectedClass.courseName - @selectedClass.courseNumber</h4>
+                <h4 class="mt-4">Attendance Records for @selectedClass.courseName - @selectedClass.courseNumber</h4>
     }
 
-    @if (attendanceViewList == null)
+    @if (groupedAttendance == null || !groupedAttendance.Any())
     {
-        <p><em>Loading attendance records...</em></p>
-    }
-    else if (!attendanceViewList.Any())
-    {
-        <p>No attendance records found for this class.</p>
+                <p><em>No attendance records found for this class.</em></p>
     }
     else
     {
-        <table class="table table-bordered mt-3">
-            <thead>
-                <tr>
-                    <th>Student Name</th>
-                    <th>Arrival Time</th>
-                    <th>Is Present</th>
-                    <th>Is Excused</th>
-                    <th>Class Date</th>
-                    <th>Current IP</th>
-                    <th>Delete?</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var row in attendanceViewList)
-                {
-                    <tr class="@(row.MarkedForDeletion ? "marked-for-deletion" : "")">
-                        <td>@row.Record.Student.firstName @row.Record.Student.lastName</td>
-                        <td>@row.Record.ArrivalTime.ToString(@"hh\:mm\:ss")</td>
-                        <td><input type="checkbox" @bind="row.Record.IsPresent" disabled="@row.MarkedForDeletion" /></td>
-                        <td><input type="checkbox" @bind="row.Record.IsExcused" disabled="@row.MarkedForDeletion" /></td>
-                        <td>@row.Record.ClassDate.ToShortDateString()</td>
-                        <td>@row.Record.CurrentIP</td>
-                        <td>
-                            <input type="checkbox" @bind="row.MarkedForDeletion" />
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+                <input type="text" class="form-control mb-3" placeholder="Search student name..."
+                       @bind="searchText" @bind:event="oninput" />
 
-        <button class="btn btn-primary mt-3" @onclick="SaveChanges">Save Changes</button>
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Arrival Time</th>
+                            <th>Is Present</th>
+                            <th>Is Excused</th>
+                            <th>Class Date</th>
+                            <th>Current IP</th>
+                            <th>Delete?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var studentGroup in groupedAttendance
+                                                .Where(g => string.IsNullOrWhiteSpace(searchText)
+                                                        || g.Value.FullName.Contains(searchText, StringComparison.OrdinalIgnoreCase)))
+                        {
+                                var recordCount = studentGroup.Value.Records.Count;
+                                for (int i = 0; i < recordCount; i++)
+                                {
+                                        var row = studentGroup.Value.Records[i];
+                                        <tr class="@(row.MarkedForDeletion ? "marked-for-deletion" : "")">
+                                            @if (i == 0)
+                                            {
+                                                    <td rowspan="@recordCount">@studentGroup.Value.FullName</td>
+                                            }
+                                            <td>@row.Record.ArrivalTime.ToString(@"hh\:mm\:ss")</td>
+                                            <td>@(row.Record.IsPresent ? "Yes" : "No")</td>
+                                            <td>@(row.Record.IsExcused ? "Yes" : "No")</td>
+                                            <td>@row.Record.ClassDate.ToShortDateString()</td>
+                                            <td>@row.Record.CurrentIP</td>
+                                            <td><input type="checkbox" @bind="row.MarkedForDeletion" /></td>
+                                        </tr>
+                                }
+                        }
+                    </tbody>
+                </table>
+
+                <button class="btn btn-primary mt-3" @onclick="SaveChanges">Save Changes</button>
     }
 }
 
 @code {
-    // ViewModel to track each attendance record and its deletion state
     public class AttendanceViewModel
     {
         public AttendanceRecord Record { get; set; } = default!;
@@ -115,9 +94,12 @@ else
     }
 
     private List<Class>? classList;
-    private List<AttendanceViewModel>? attendanceViewList;
     private string? errorMessage;
     private int? selectedClassId;
+    private string searchText = string.Empty;
+
+    private Dictionary<int, (string FullName, List<AttendanceViewModel> Records)> groupedAttendance
+        = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -141,10 +123,19 @@ else
                 .Include(a => a.Student)
                 .ToListAsync();
 
-            attendanceViewList = records.Select(record => new AttendanceViewModel
-                {
-                    Record = record
-                }).ToList();
+            var viewModels = records.Select(r => new AttendanceViewModel { Record = r }).ToList();
+
+            groupedAttendance = viewModels
+                .GroupBy(vm => vm.Record.StudentId)
+                .ToDictionary(
+                    g => g.Key,
+                    g =>
+                    {
+                        var student = g.First().Record.Student;
+                        var fullName = $"{student.firstName} {student.lastName}";
+                        return (fullName, g.ToList());
+                    }
+                );
         }
         catch (Exception ex)
         {
@@ -156,18 +147,10 @@ else
     {
         try
         {
-            if (attendanceViewList == null)
-                return;
+            var allRecords = groupedAttendance.Values.SelectMany(g => g.Records).ToList();
 
-            var toDelete = attendanceViewList
-                .Where(vm => vm.MarkedForDeletion)
-                .Select(vm => vm.Record)
-                .ToList();
-
-            var toUpdate = attendanceViewList
-                .Where(vm => !vm.MarkedForDeletion)
-                .Select(vm => vm.Record)
-                .ToList();
+            var toDelete = allRecords.Where(vm => vm.MarkedForDeletion).Select(vm => vm.Record).ToList();
+            var toUpdate = allRecords.Where(vm => !vm.MarkedForDeletion).Select(vm => vm.Record).ToList();
 
             if (toDelete.Any())
             {
