@@ -1,0 +1,74 @@
+@page "/startquiz"
+@inject ApplicationDbContext Db
+@inject NavigationManager NavManager
+
+<h3>Assign Quiz Bank to Class</h3>
+
+<EditForm Model="@quizSession" OnValidSubmit="AssignQuiz">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group mb-2">
+        <label>Select Class:</label>
+        <select class="form-control" @bind="quizSession.ClassId">
+            <option value="">-- Select a Class --</option>
+            @foreach (var cls in classes)
+            {
+                <option value="@cls.classId">@cls.courseName (@cls.courseNumber)</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Select Quiz Bank:</label>
+        <select class="form-control" @bind="quizSession.QuizBankId">
+            <option value="">-- Select a Quiz Bank --</option>
+            @foreach (var qb in quizBanks)
+            {
+                <option value="@qb.QuizBankId">@qb.Title</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-check mb-3">
+        <input type="checkbox" class="form-check-input" @bind="quizSession.IsActive" />
+        <label class="form-check-label">Is Active?</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Assign Quiz</button>
+</EditForm>
+
+@if (!string.IsNullOrEmpty(statusMessage))
+{
+    <div class="alert alert-info mt-3">@statusMessage</div>
+}
+
+@code {
+    private List<Class> classes = new();
+    private List<QuizBank> quizBanks = new();
+    private QuizSession quizSession = new QuizSession();
+    private string statusMessage = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        classes = await Db.Classes.ToListAsync();
+        quizBanks = await Db.QuizBanks.ToListAsync();
+    }
+
+    private async Task AssignQuiz()
+    {
+        try
+        {
+            // Set the session date to now
+            quizSession.SessionDate = DateTime.Now;
+
+            Db.QuizSessions.Add(quizSession);
+            await Db.SaveChangesAsync();
+            statusMessage = "Quiz assigned successfully!";
+        }
+        catch (Exception ex)
+        {
+            statusMessage = $"Error: {ex.Message}";
+        }
+    }
+}
