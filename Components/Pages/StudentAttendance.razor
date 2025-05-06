@@ -71,8 +71,8 @@ else
                                                     <td rowspan="@recordCount">@studentGroup.Value.FullName</td>
                                             }
                                             <td>@row.Record.ArrivalTime.ToString(@"hh\:mm\:ss")</td>
-                                            <td>@(row.Record.IsPresent ? "Yes" : "No")</td>
-                                            <td>@(row.Record.IsExcused ? "Yes" : "No")</td>
+                                            <td><input type="checkbox" @bind="row.Record.IsPresent" /></td>
+                                            <td><input type="checkbox" @bind="row.Record.IsExcused" /></td>
                                             <td>@row.Record.ClassDate.ToShortDateString()</td>
                                             <td>@row.Record.CurrentIP</td>
                                             <td><input type="checkbox" @bind="row.MarkedForDeletion" /></td>
