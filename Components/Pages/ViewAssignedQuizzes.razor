@@ -1,0 +1,157 @@
+@page "/viewassignedquizzes"
+@inject ApplicationDbContext Db
+@inject IJSRuntime JSRuntime
+
+<h3>Assigned Quizzes</h3>
+
+<div class="mb-3">
+    <label>Filter by Instructor ID:</label>
+    <input type="number" class="form-control" @bind="filterInstructorId" />
+</div>
+
+<div class="mb-3">
+    <label>Filter by Class:</label>
+    <select class="form-control" @bind="filterClassId">
+        <option value="">-- All Classes --</option>
+        @foreach (var cls in allClasses)
+        {
+                <option value="@cls.classId">@cls.courseName (@cls.courseNumber)</option>
+        }
+    </select>
+</div>
+
+<button class="btn btn-secondary mb-3" @onclick="ApplyFilter">Apply Filter</button>
+
+@if (!string.IsNullOrEmpty(statusMessage))
+{
+        <p class="text-danger">Debug: @statusMessage</p>
+}
+
+@if (assignedQuizzes == null)
+{
+        <p><em>Loading...</em></p>
+}
+else if (!assignedQuizzes.Any())
+{
+        <p>No active quizzes assigned at this time.</p>
+}
+else
+{
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Class</th>
+                    <th>Course #</th>
+                    <th>Quiz Bank</th>
+                    <th>Date</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Is Active</th>
+                    <th>Status</th>
+                    <th>Timer</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var session in assignedQuizzes)
+            {
+                        <tr>
+                            <td>@session.Class.courseName</td>
+                            <td>@session.Class.courseNumber</td>
+                            <td>@session.QuizBank.Title</td>
+                            <td>@session.SessionDate.ToShortDateString()</td>
+                            <td>@session.startTime</td>
+                            <td>@session.endTime</td>
+                            <td>@(session.IsActive ? "Yes" : "No")</td>
+                            <td>@(session.IsExpired ? "Expired" : "Open")</td>
+                            <td>
+                                <a class="btn btn-info btn-sm" href="@($"/timer?sessionId={session.SessionId}")">Show Timer</a>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" @onclick="() => ConfirmEndSession(session.SessionId)">End Now</button>
+                            </td>
+                        </tr>
+            }
+            </tbody>
+        </table>
+}
+
+@code {
+    private List<QuizSession> assignedQuizzes;
+    private List<Class> allClasses = new();
+    private int? filterInstructorId = null;
+    private int? filterClassId = null;
+    private string statusMessage = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            allClasses = await Db.Classes.ToListAsync();
+            await LoadQuizzes();
+        }
+        catch (Exception ex)
+        {
+            assignedQuizzes = new();
+            statusMessage = $"OnInit error: {ex.Message}";
+        }
+    }
+
+    private async Task LoadQuizzes()
+    {
+        try
+        {
+            var query = Db.QuizSessions
+                .Include(q => q.Class)
+                .Include(q => q.QuizBank)
+                .AsQueryable();
+
+            if (filterInstructorId.HasValue)
+            {
+                query = query.Where(q => q.Class.instructorId == filterInstructorId.Value);
+            }
+
+            if (filterClassId.HasValue)
+            {
+                query = query.Where(q => q.ClassId == filterClassId.Value);
+            }
+
+            var allSessions = await query.ToListAsync();
+
+            assignedQuizzes = allSessions
+                .Where(q => q.IsActive && DateTime.Now.TimeOfDay < q.endTime)
+                .ToList();
+        }
+        catch (Exception ex)
+        {
+            assignedQuizzes = new();
+            statusMessage = $"Load error: {ex.Message}";
+        }
+    }
+
+    private async Task ApplyFilter()
+    {
+        await LoadQuizzes();
+    }
+
+    private async Task ConfirmEndSession(int sessionId)
+    {
+        bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm",
+            "Clicking end now will stop the quiz, and store any current attendance data from students. Quiz will be deleted from assigned quizzes. Would you like to continue?");
+        if (confirmed)
+        {
+            await EndSessionEarly(sessionId);
+        }
+    }
+
+    private async Task EndSessionEarly(int sessionId)
+    {
+        var session = await Db.QuizSessions.FindAsync(sessionId);
+        if (session != null && session.IsActive)
+        {
+            session.IsActive = false;
+            await Db.SaveChangesAsync();
+            await LoadQuizzes();
+        }
+    }
+}

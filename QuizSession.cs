@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using BlazorDesktop.Models;
+using BlazorDesktop.Models; // ✅ Adjust this to your actual namespace
 
 [Table("quizsession")]
 public class QuizSession
@@ -17,12 +17,21 @@ public class QuizSession
     public int QuizBankId { get; set; }
 
     [Column("isActive")]
-    public bool IsActive { get; set; } = true; // default true
+    public bool IsActive { get; set; } = true;
 
     [Column("sessionDate")]
     public DateTime SessionDate { get; set; } = DateTime.Now;
 
-    // Navigation Properties (Optional but nice for EF Core)
+    [Column("startTime")]
+    public TimeSpan startTime { get; set; }
+
+    [Column("endTime")]
+    public TimeSpan endTime { get; set; }
+
+    // Navigation Properties
     public Class Class { get; set; }
     public QuizBank QuizBank { get; set; }
+
+    [NotMapped]
+    public bool IsExpired => DateTime.Now.TimeOfDay > endTime;
 }

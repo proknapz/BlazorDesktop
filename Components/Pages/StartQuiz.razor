@@ -1,10 +1,11 @@
 @page "/startquiz"
 @inject ApplicationDbContext Db
 @inject NavigationManager NavManager
+@inject IJSRuntime JSRuntime
 
 <h3>Assign Quiz Bank to Class</h3>
 
-<EditForm Model="@quizSession" OnValidSubmit="AssignQuiz">
+<EditForm Model="@quizSession" OnValidSubmit="HandleSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -30,9 +31,14 @@
         </select>
     </div>
 
-    <div class="form-check mb-3">
-        <input type="checkbox" class="form-check-input" @bind="quizSession.IsActive" />
-        <label class="form-check-label">Is Active?</label>
+    <div class="form-group mb-2">
+        <label>Duration (minutes):</label>
+        <select class="form-control" @bind="selectedDuration">
+            @for (int i = 5; i <= 60; i += 5)
+            {
+                <option value="@i">@i minutes</option>
+            }
+        </select>
     </div>
 
     <button type="submit" class="btn btn-primary">Assign Quiz</button>
@@ -48,6 +54,7 @@
     private List<QuizBank> quizBanks = new();
     private QuizSession quizSession = new QuizSession();
     private string statusMessage = string.Empty;
+    private int selectedDuration = 30;
 
     protected override async Task OnInitializedAsync()
     {
@@ -55,16 +62,46 @@
         quizBanks = await Db.QuizBanks.ToListAsync();
     }
 
-    private async Task AssignQuiz()
+    private async Task HandleSubmit()
     {
         try
         {
-            // Set the session date to now
-            quizSession.SessionDate = DateTime.Now;
+            var now = DateTime.Now;
+            var start = now.TimeOfDay;
+            var end = start.Add(TimeSpan.FromMinutes(selectedDuration));
+
+            // Check for active sessions for this class
+            var activeSessions = await Db.QuizSessions
+                .Where(s => s.ClassId == quizSession.ClassId && s.IsActive)
+                .ToListAsync();
+
+            if (activeSessions.Any())
+            {
+                bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm",
+                    $"A quiz is already assigned to this class. Overwrite it?");
+
+                if (!confirmed)
+                {
+                    statusMessage = "Quiz assignment cancelled.";
+                    return;
+                }
+
+                // End all current active sessions for this class
+                foreach (var session in activeSessions)
+                {
+                    session.IsActive = false;
+                }
+            }
+
+            // Create and insert the new session
+            quizSession.SessionDate = now;
+            quizSession.startTime = start;
+            quizSession.endTime = end;
+            quizSession.IsActive = true;
 
             Db.QuizSessions.Add(quizSession);
             await Db.SaveChangesAsync();
-            statusMessage = "Quiz assigned successfully!";
+            statusMessage = "Quiz assigned successfully.";
         }
         catch (Exception ex)
         {

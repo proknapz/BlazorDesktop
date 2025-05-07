@@ -1,0 +1,85 @@
+@page "/timer"
+@inject ApplicationDbContext Db
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavManager
+@using Microsoft.AspNetCore.Components
+@using System.Timers
+
+<div class="text-center mt-5">
+    <h2 class="display-1 text-center" style="color:@timerColor">@Remaining</h2>
+</div>
+
+<div class="progress mx-auto my-4" style="width: 60%; height: 30px;">
+    <div class="progress-bar" role="progressbar"
+         style="width: @progressPercent%; background-color:@timerColor;"
+         aria-valuenow="@progressPercent" aria-valuemin="0" aria-valuemax="100">
+    </div>
+</div>
+
+<div class="text-center">
+    <button class="btn btn-outline-secondary" @onclick="ReturnNow">Return Now</button>
+</div>
+
+<audio id="alarm-sound">
+    <source src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" type="audio/ogg" />
+</audio>
+
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public int sessionId { get; set; }
+
+    private string Remaining = "";
+    private string timerColor = "black";
+    private int progressPercent = 100;
+
+    private TimeSpan startTime;
+    private TimeSpan endTime;
+    private System.Threading.Timer countdownTimer;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var session = await Db.QuizSessions.FindAsync(sessionId);
+        if (session != null)
+        {
+            startTime = session.startTime;
+            endTime = session.endTime;
+
+            countdownTimer = new System.Threading.Timer(UpdateTimer, null, 0, 1000);
+        }
+        else
+        {
+            Remaining = "--:--";
+        }
+    }
+
+    private async void UpdateTimer(object state)
+    {
+        var now = DateTime.Now.TimeOfDay;
+        var total = endTime - startTime;
+        var remaining = endTime - now;
+
+        if (remaining.TotalSeconds <= 0)
+        {
+            Remaining = "00:00";
+            progressPercent = 0;
+            timerColor = "red";
+            countdownTimer.Dispose();
+            await JSRuntime.InvokeVoidAsync("document.getElementById('alarm-sound').play");
+            await Task.Delay(2000);
+            await InvokeAsync(() => NavManager.NavigateTo("/viewassignedquizzes"));
+        }
+        else
+        {
+            Remaining = remaining.ToString(@"mm\:ss");
+            timerColor = remaining.TotalMinutes <= 5 ? "red" : "black";
+            progressPercent = (int)(remaining.TotalSeconds / total.TotalSeconds * 100);
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private void ReturnNow()
+    {
+        NavManager.NavigateTo("/viewassignedquizzes");
+    }
+}
