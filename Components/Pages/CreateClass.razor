@@ -1,0 +1,66 @@
+@page "/createclass"
+@inject ApplicationDbContext Db
+
+<h3>Create New Class</h3>
+
+<EditForm Model="@newClass" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group mb-2">
+        <label>Course Name:</label>
+        <InputText class="form-control" @bind-Value="newClass.courseName" />
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Course Number:</label>
+        <InputText class="form-control" @bind-Value="newClass.courseNumber" />
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Select Instructor:</label>
+        <select class="form-control" @bind="newClass.instructorId">
+            <option value="">-- Select Instructor --</option>
+            @foreach (var instructor in instructors)
+            {
+                <option value="@instructor.instructorID">
+                    @instructor.FirstName @instructor.LastName (@instructor.instructorID)
+                </option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Create Class</button>
+</EditForm>
+
+@if (!string.IsNullOrEmpty(statusMessage))
+{
+    <div class="alert alert-success mt-3">@statusMessage</div>
+}
+
+@code {
+    private Class newClass = new();
+    private List<Instructor> instructors = new();
+    private string statusMessage = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        instructors = await Db.Instructors.ToListAsync();
+    }
+
+    private async Task HandleSubmit()
+    {
+        if (string.IsNullOrWhiteSpace(newClass.courseName) ||
+            string.IsNullOrWhiteSpace(newClass.courseNumber) ||
+            newClass.instructorId == 0)
+        {
+            statusMessage = "All fields are required.";
+            return;
+        }
+
+        Db.Classes.Add(newClass);
+        await Db.SaveChangesAsync();
+        statusMessage = "Class created successfully!";
+        newClass = new(); // reset form
+    }
+}

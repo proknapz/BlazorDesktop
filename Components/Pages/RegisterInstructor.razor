@@ -1,0 +1,65 @@
+@page "/registerinstructor"
+@inject ApplicationDbContext Db
+@inject IJSRuntime JSRuntime
+
+<h3>Instructor Registration</h3>
+
+<EditForm Model="@instructor" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group mb-2">
+        <label>First Name:</label>
+        <InputText class="form-control" @bind-Value="instructor.FirstName" />
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Last Name:</label>
+        <InputText class="form-control" @bind-Value="instructor.LastName" />
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Email:</label>
+        <InputText class="form-control" @bind-Value="instructor.Email" />
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Username:</label>
+        <InputText class="form-control" @bind-Value="instructor.Username" />
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Instructor ID:</label>
+        <InputNumber class="form-control" @bind-Value="instructor.instructorID" />
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Password:</label>
+        <InputText class="form-control" @bind-Value="instructor.password" type="password" />
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Register</button>
+</EditForm>
+
+@code {
+    private Instructor instructor = new();
+
+    private async Task HandleSubmit()
+    {
+        if (string.IsNullOrWhiteSpace(instructor.FirstName) ||
+            string.IsNullOrWhiteSpace(instructor.LastName) ||
+            string.IsNullOrWhiteSpace(instructor.Email) ||
+            string.IsNullOrWhiteSpace(instructor.Username) ||
+            string.IsNullOrWhiteSpace(instructor.password) ||
+            instructor.instructorID == 0)
+        {
+            await JSRuntime.InvokeVoidAsync("alert", "All fields are required.");
+            return;
+        }
+
+        Db.Instructors.Add(instructor);
+        await Db.SaveChangesAsync();
+        await JSRuntime.InvokeVoidAsync("alert", "Instructor registered successfully!");
+        instructor = new(); // reset form
+    }
+}

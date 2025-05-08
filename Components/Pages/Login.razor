@@ -32,7 +32,7 @@
         try
         {
             var instructor = await DbContext.Instructors
-                .FirstOrDefaultAsync(i => i.Username == username && i.Password == password);
+                .FirstOrDefaultAsync(i => i.Username == username && i.password == password);
 
             if (instructor != null)
             {
