@@ -1,3 +1,4 @@
+@*written by conan starting 4/28/2025 CS 4485 *@
 @page "/viewassignedquizzes"
 @inject ApplicationDbContext Db
 @inject IJSRuntime JSRuntime
@@ -15,7 +16,7 @@
         <option value="">-- All Classes --</option>
         @foreach (var cls in allClasses)
         {
-                <option value="@cls.classId">@cls.courseName (@cls.courseNumber)</option>
+            <option value="@cls.classId">@cls.courseName (@cls.courseNumber)</option>
         }
     </select>
 </div>
@@ -24,56 +25,58 @@
 
 @if (!string.IsNullOrEmpty(statusMessage))
 {
-        <p class="text-danger">Debug: @statusMessage</p>
+    <p class="text-danger">Debug: @statusMessage</p>
 }
 
 @if (assignedQuizzes == null)
 {
-        <p><em>Loading...</em></p>
+    <p><em>Loading...</em></p>
 }
 else if (!assignedQuizzes.Any())
 {
-        <p>No active quizzes assigned at this time.</p>
+    <p>No active quizzes assigned at this time.</p>
 }
 else
 {
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Class</th>
-                    <th>Course #</th>
-                    <th>Quiz Bank</th>
-                    <th>Date</th>
-                    <th>Start</th>
-                    <th>End</th>
-                    <th>Is Active</th>
-                    <th>Status</th>
-                    <th>Timer</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Class</th>
+                <th>Course #</th>
+                <th>Quiz Bank</th>
+                <th>Date</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Password</th>
+                <th>Is Active</th>
+                <th>Status</th>
+                <th>Timer</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
             @foreach (var session in assignedQuizzes)
             {
-                        <tr>
-                            <td>@session.Class.courseName</td>
-                            <td>@session.Class.courseNumber</td>
-                            <td>@session.QuizBank.Title</td>
-                            <td>@session.SessionDate.ToShortDateString()</td>
-                            <td>@session.startTime</td>
-                            <td>@session.endTime</td>
-                            <td>@(session.IsActive ? "Yes" : "No")</td>
-                            <td>@(session.IsExpired ? "Expired" : "Open")</td>
-                            <td>
-                                <a class="btn btn-info btn-sm" href="@($"/timer?sessionId={session.SessionId}")">Show Timer</a>
-                            </td>
-                            <td>
-                                <button class="btn btn-danger btn-sm" @onclick="() => ConfirmEndSession(session.SessionId)">End Now</button>
-                            </td>
-                        </tr>
+                <tr>
+                    <td>@session.Class.courseName</td>
+                    <td>@session.Class.courseNumber</td>
+                    <td>@session.QuizBank.Title</td>
+                    <td>@session.SessionDate.ToShortDateString()</td>
+                    <td>@session.startTime</td>
+                    <td>@session.endTime</td>
+                    <td>@session.password</td>
+                    <td>@(session.IsActive ? "Yes" : "No")</td>
+                    <td>@(session.IsExpired ? "Expired" : "Open")</td>
+                    <td>
+                        <a class="btn btn-info btn-sm" href="@($"/timer?sessionId={session.SessionId}")">Show Timer</a>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" @onclick="() => ConfirmEndSession(session.SessionId)">End Now</button>
+                    </td>
+                </tr>
             }
-            </tbody>
-        </table>
+        </tbody>
+    </table>
 }
 
 @code {

@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿//written by manoj starting 4/13/2025 CS 4485 
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-//mxm200063 manoj manivannan
+
 namespace BlazorDesktop.Models
 {
     [Table("quizquestions")]

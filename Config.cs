@@ -1,3 +1,4 @@
+//written by conan starting 3/26/2025 CS 4485 
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -5,10 +6,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 [Table("config")]
 public class Config
 {
-    [Key] // Marks this property as the primary key
-    public int Id { get; set; } // Primary Key
+    [Key]  
+    public int Id { get; set; }  
 
-    // Navigation Property
+  
     [ForeignKey("classId")]
     public Class Class { get; set; }
 

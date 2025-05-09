@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using BlazorDesktop.Models; // ✅ Adjust this to your actual namespace
+using BlazorDesktop.Models;
 
 [Table("quizsession")]
 public class QuizSession
@@ -27,6 +27,11 @@ public class QuizSession
 
     [Column("endTime")]
     public TimeSpan endTime { get; set; }
+
+    [Column("password")]
+    [Required]
+    public string password { get; set; } = string.Empty;
+
 
     // Navigation Properties
     public Class Class { get; set; }

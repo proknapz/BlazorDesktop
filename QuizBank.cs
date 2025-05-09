@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿//written by manoj starting 4/12/2025 CS 4485 
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-//mxm200063 manoj manivannan
+
 namespace BlazorDesktop.Models
 {
     [Table("quizbank")]

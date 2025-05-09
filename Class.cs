@@ -1,12 +1,13 @@
+//written by conan starting 3/26/2025 CS 4485 
 using System;
 using System.ComponentModel.DataAnnotations;
 
 public class Class
 {
 
-    public int classId { get; set; } // Primary key, non-nullable by default in EF Core
+    public int classId { get; set; } 
 
-    public string courseName { get; set; } // Stores the name of the course being taught
+    public string courseName { get; set; } 
 
     public string courseNumber { get; set; }
 

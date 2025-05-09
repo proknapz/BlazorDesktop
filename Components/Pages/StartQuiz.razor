@@ -1,3 +1,4 @@
+@*written by manoj starting 4/12/2025 CS 4485 *@
 @page "/startquiz"
 @inject ApplicationDbContext Db
 @inject NavigationManager NavManager
@@ -41,6 +42,11 @@
         </select>
     </div>
 
+    <div class="form-group mb-2">
+        <label>Quiz Password:</label>
+        <InputText class="form-control" @bind-Value="quizSession.password" type="password" />
+    </div>
+
     <button type="submit" class="btn btn-primary">Assign Quiz</button>
 </EditForm>
 
@@ -70,7 +76,6 @@
             var start = now.TimeOfDay;
             var end = start.Add(TimeSpan.FromMinutes(selectedDuration));
 
-            // Check for active sessions for this class
             var activeSessions = await Db.QuizSessions
                 .Where(s => s.ClassId == quizSession.ClassId && s.IsActive)
                 .ToListAsync();
@@ -86,14 +91,12 @@
                     return;
                 }
 
-                // End all current active sessions for this class
                 foreach (var session in activeSessions)
                 {
                     session.IsActive = false;
                 }
             }
 
-            // Create and insert the new session
             quizSession.SessionDate = now;
             quizSession.startTime = start;
             quizSession.endTime = end;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿//written by conan starting 3/26/2025 CS 4485 
+using System;
 using System.ComponentModel.DataAnnotations;
 
 public class Instructor

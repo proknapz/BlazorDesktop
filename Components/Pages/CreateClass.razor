@@ -1,8 +1,9 @@
+@*written by vishal starting 5/2/2025 CS 4485 *@
 @page "/createclass"
 @inject ApplicationDbContext Db
 
 <h3>Create New Class</h3>
-
+@**@
 <EditForm Model="@newClass" OnValidSubmit="HandleSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
@@ -61,6 +62,6 @@
         Db.Classes.Add(newClass);
         await Db.SaveChangesAsync();
         statusMessage = "Class created successfully!";
-        newClass = new(); // reset form
+        newClass = new(); 
     }
 }
