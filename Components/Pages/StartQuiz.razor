@@ -3,7 +3,7 @@
 @inject ApplicationDbContext Db
 @inject NavigationManager NavManager
 @inject IJSRuntime JSRuntime
-
+@*display quiz that will be added*@
 <h3>Assign Quiz Bank to Class</h3>
 
 <EditForm Model="@quizSession" OnValidSubmit="HandleSubmit">
@@ -20,7 +20,7 @@
             }
         </select>
     </div>
-
+    @*dropdown for quiz banks*@
     <div class="form-group mb-2">
         <label>Select Quiz Bank:</label>
         <select class="form-control" @bind="quizSession.QuizBankId">
@@ -31,7 +31,7 @@
             }
         </select>
     </div>
-
+    @*display quiz active time*@
     <div class="form-group mb-2">
         <label>Duration (minutes):</label>
         <select class="form-control" @bind="selectedDuration">
@@ -41,7 +41,7 @@
             }
         </select>
     </div>
-
+    @*quiz password*@
     <div class="form-group mb-2">
         <label>Quiz Password:</label>
         <InputText class="form-control" @bind-Value="quizSession.password" type="password" />
@@ -61,13 +61,13 @@
     private QuizSession quizSession = new QuizSession();
     private string statusMessage = string.Empty;
     private int selectedDuration = 30;
-
+    //wait for user data
     protected override async Task OnInitializedAsync()
     {
         classes = await Db.Classes.ToListAsync();
         quizBanks = await Db.QuizBanks.ToListAsync();
     }
-
+	//save data on db after entering all fields
     private async Task HandleSubmit()
     {
         try
@@ -75,11 +75,11 @@
             var now = DateTime.Now;
             var start = now.TimeOfDay;
             var end = start.Add(TimeSpan.FromMinutes(selectedDuration));
-
+            //validation 
             var activeSessions = await Db.QuizSessions
                 .Where(s => s.ClassId == quizSession.ClassId && s.IsActive)
                 .ToListAsync();
-
+            //check if quiz is assigned
             if (activeSessions.Any())
             {
                 bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm",

@@ -7,7 +7,7 @@
 <link href="css/StudentAttendance.css" rel="stylesheet" />
 
 <h3>Select a Class</h3>
-
+@*UI to select a class*@
 @if (!string.IsNullOrEmpty(errorMessage))
 {
         <p class="text-danger">@errorMessage</p>
@@ -27,7 +27,7 @@ else
             }
         </div>
 }
-
+@*select class by id using a filter*@
 @if (selectedClassId != null)
 {
     var selectedClass = classList?.FirstOrDefault(c => c.classId == selectedClassId);
@@ -44,7 +44,7 @@ else
     {
                 <input type="text" class="form-control mb-3" placeholder="Search student name..."
                        @bind="searchText" @bind:event="oninput" />
-
+                @*display title of columns*@
                 <table class="table table-bordered table-sm">
                     <thead>
                         <tr>
@@ -57,7 +57,9 @@ else
                             <th>Delete?</th>
                         </tr>
                     </thead>
+
                     <tbody>
+                        @*display attentence information from database of students*@
                         @foreach (var studentGroup in groupedAttendance
                                                 .Where(g => string.IsNullOrWhiteSpace(searchText)
                                                         || g.Value.FullName.Contains(searchText, StringComparison.OrdinalIgnoreCase)))
@@ -101,7 +103,7 @@ else
 
     private Dictionary<int, (string FullName, List<AttendanceViewModel> Records)> groupedAttendance
         = new();
-
+    //pull data from database
     protected override async Task OnInitializedAsync()
     {
         try
@@ -113,7 +115,7 @@ else
             errorMessage = $"Error: {ex.Message}";
         }
     }
-
+    //load the attendance records of a selected class
     private async Task LoadAttendanceRecords(int classId)
     {
         selectedClassId = classId;
@@ -143,7 +145,7 @@ else
             errorMessage = $"Error loading attendance: {ex.Message}";
         }
     }
-
+	//save changes to the database
     private async Task SaveChanges()
     {
         try

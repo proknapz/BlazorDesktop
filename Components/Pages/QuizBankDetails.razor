@@ -3,7 +3,7 @@
 @inject ApplicationDbContext Db
 @inject NavigationManager Navigation
 @using BlazorDesktop.Models
-//mxm200063 manoj manivannan
+@*enter in quiz bank and the questions *@
 <h3>Quiz Bank Details</h3>
 
 @if (quizBank == null)
@@ -16,6 +16,7 @@ else
     <h5>Questions (@quizBank.Questions.Count/3)</h5>
 
     <ul>
+        @*edits individual fields within questions*@
         @foreach (var question in quizBank.Questions)
         {
             <li>
@@ -53,7 +54,7 @@ else
             </li>
         }
     </ul>
-
+    @*display individual fields within questions*@ 
     @if (quizBank.Questions.Count < 3)
     {
         <h5>Add New Question</h5>
@@ -98,14 +99,14 @@ else
         LoadQuizBank();
         newQuestion.QuizBankId = QuizBankId;
     }
-
+	/// load quiz questions from the database
     private void LoadQuizBank()
     {
         quizBank = Db.QuizBanks
             .Include(qb => qb.Questions)
             .FirstOrDefault(qb => qb.QuizBankId == QuizBankId);
     }
-
+    //add question to the database
     private void AddQuestion()
     {
         if (quizBank.Questions.Count < 3)
@@ -115,7 +116,7 @@ else
             Navigation.NavigateTo($"/quizbanks/details/{QuizBankId}", forceLoad: true);
         }
     }
-
+    //edit questions and save changes to database
     private void StartEdit(QuizQuestion q)
     {
         editingQuestionId = q.QuizQuestionId;
@@ -131,12 +132,12 @@ else
             CorrectAnswer = q.CorrectAnswer
         };
     }
-
+    //cancel edit
     private void CancelEdit()
     {
         editingQuestionId = null;
     }
-
+    //update the question choice
     private void UpdateQuestion()
     {
         var question = Db.QuizQuestions.Find(editQuestion.QuizQuestionId);
@@ -154,21 +155,21 @@ else
         editingQuestionId = null;
         LoadQuizBank();
     }
-
+    //delete questions
     private void DeleteQuestion(QuizQuestion q)
     {
         Db.QuizQuestions.Remove(q);
         Db.SaveChanges();
         LoadQuizBank();
     }
-
+    //delete the entire quiz bank
     private void DeleteQuizBank()
     {
         Db.QuizBanks.Remove(quizBank);
         Db.SaveChanges();
         Navigation.NavigateTo("/quizbanks");
     }
-
+    //get the correct answer
     private string GetOptionLetter(int? correct)
     {
         return correct switch

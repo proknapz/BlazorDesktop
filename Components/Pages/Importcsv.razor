@@ -1,17 +1,19 @@
-﻿@*written by vishal starting 4/2/2025 CS 4485 *@
+﻿@* written by vishal starting 4/2/2025 CS 4485 *@
+
 @page "/Importcsv"
 @inject IJSRuntime JSRuntime
 @inject ApplicationDbContext Db
 @using BlazorDesktop
 @using BlazorDesktop.Components.Pages
 
-
 <h3>Import CSV Data</h3>
+
 <div class="container">
     <div class="form-group">
         <button class="btn btn-primary" @onclick="SelectFile">Browse</button>
         <span>@filePath</span>
     </div>
+    @* importcsv button *@
     <div class="form-group">
         <button class="btn btn-success" @onclick="ImportFromCsv" disabled="@Importbutton">Import</button>
     </div>
@@ -19,31 +21,32 @@
     <div class="form-group">
         <label>Status:</label>
         <span class="status-message">@statusMessage</span>
-    </div>  
+    </div>
 
+    @* csv file display *@
     @if (csvData != null && csvData.Count > 0)
     {
-            <table class="table">
-                <thead>
+        <table class="table">
+            <thead>
+                <tr>
+                    @foreach (var header in csvData[0].Keys)
+                    {
+                        <th>@header</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var row in csvData)
+                {
                     <tr>
-                        @foreach (var header in csvData[0].Keys)
+                        @foreach (var value in row.Values)
                         {
-                                <th>@header</th>
+                            <td>@value</td>
                         }
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var row in csvData)
-                    {
-                            <tr>
-                                @foreach (var value in row.Values)
-                                {
-                                        <td>@value</td>
-                                }
-                            </tr>
-                    }
-                </tbody>
-            </table>
+                }
+            </tbody>
+        </table>
     }
 
     <hr />
@@ -55,6 +58,8 @@
     private string statusMessage = "No file selected.";
     private bool Importbutton = true;
     private List<Dictionary<string, string>> csvData = null;
+
+    //reads the csv file once picked from files
     private async Task SelectFile()
     {
         try
@@ -65,6 +70,7 @@
                 statusMessage = "Failed to read the file.";
                 return;
             }
+
             csvData = parseCsv(fileContent);
             filePath = "File Selected";
             Importbutton = false;
@@ -86,16 +92,19 @@
         {
             var row = new Dictionary<string, string>();
             var section = lines[i].Split(',');
+
             for (int j = 0; j < headers.Length; j++)
             {
                 if (j < section.Length)
                     row[headers[j].Trim()] = section[j].Trim();
             }
+
             if (row.Count > 0) rows.Add(row);
         }
         return rows;
     }
 
+    //parsed csv into student record in db and updates
     private async Task ImportFromCsv()
     {
         if (csvData == null || csvData.Count == 0)
@@ -104,25 +113,23 @@
             return;
         }
 
-        // 🔍 Get valid classIds from the database to filter invalid rows
         var validClassIds = await Db.Classes.Select(c => c.classId).ToListAsync();
 
-        // 🧠 Convert and filter students with valid classId only
         var students = csvData.Select(row =>
         {
             int parsedClassId = int.TryParse(row.GetValueOrDefault("classId")?.Trim(), out var cid) ? cid : -1;
 
             return new Student
-            {
-                studentId = int.TryParse(row.GetValueOrDefault("studentId")?.Trim(), out var sid) ? sid : 0,
-                utdID = row.GetValueOrDefault("utdID")?.Trim(),
-                firstName = row.GetValueOrDefault("firstName")?.Trim(),
-                lastName = row.GetValueOrDefault("lastName")?.Trim(),
-                classId = parsedClassId,
-                instructorId = int.TryParse(row.GetValueOrDefault("instructorId")?.Trim(), out var instId) ? instId : 0
-            };
+                {
+                    studentId = int.TryParse(row.GetValueOrDefault("studentId")?.Trim(), out var sid) ? sid : 0,
+                    utdID = row.GetValueOrDefault("utdID")?.Trim(),
+                    firstName = row.GetValueOrDefault("firstName")?.Trim(),
+                    lastName = row.GetValueOrDefault("lastName")?.Trim(),
+                    classId = parsedClassId,
+                    instructorId = int.TryParse(row.GetValueOrDefault("instructorId")?.Trim(), out var instId) ? instId : 0
+                };
         })
-        .Where(s => validClassIds.Contains(s.classId)) // ✅ Only valid foreign keys
+        .Where(s => validClassIds.Contains(s.classId))
         .ToList();
 
         try
@@ -132,11 +139,11 @@
                 var existing = await Db.Students.FindAsync(student.studentId);
                 if (existing != null)
                 {
-                    Db.Entry(existing).CurrentValues.SetValues(student); // update
+                    Db.Entry(existing).CurrentValues.SetValues(student);
                 }
                 else
                 {
-                    Db.Students.Add(student); // insert
+                    Db.Students.Add(student);
                 }
             }
 
@@ -150,7 +157,9 @@
         }
     }
 }
+
 <script>
+    // js for csv file inputs
     window.selectAndReadFile = async () => {
         const input = document.createElement("input");
         input.type = "file";

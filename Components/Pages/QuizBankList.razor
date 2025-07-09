@@ -2,11 +2,11 @@
 @page "/quizbanks"
 @inject ApplicationDbContext Db
 <h3>Quiz Banks</h3>
-
+@*page for creating quiz bank*@
 <p>
     <a class="btn btn-primary" href="/quizbanks/create">Create New Quiz Bank</a>
 </p>
-
+@*display quiz titles with button to edit the quiz*@
 @if (quizBanks == null)
 {
     <p><em>Loading...</em></p>

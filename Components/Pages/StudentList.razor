@@ -3,13 +3,14 @@
 @inject ApplicationDbContext DbContext
 
 <h3>Available Classes</h3>
-
+@*display UI for list of students in each class*@
 @if (classes == null)
 {
     <p>Loading classes...</p>
 }
 else
 {
+    @*buttons to click on each class*@
     @foreach (var cls in classes)
     {
         <button @onclick="@(() => OnClassSelected(cls.classId))" class="class-button">
@@ -17,6 +18,7 @@ else
         </button>
     }
 }
+@*display students in selected class*@
 @if (selectedClassId.HasValue)
 {
     <h4>Students in @selectedClassName</h4>
@@ -82,7 +84,7 @@ else
     {
         classes = await DbContext.Classes.ToListAsync();
     }
-
+	//user will select class to display data
     private async Task OnClassSelected(int classId)
     {
         selectedClassId = classId;

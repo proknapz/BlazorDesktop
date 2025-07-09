@@ -2,9 +2,9 @@
 @page "/quizbanks/create"
 @inject ApplicationDbContext Db
 @inject NavigationManager Navigation
-//mxm200063 manoj manivannan
-<h3>Create Quiz Bank</h3>
 
+<h3>Create Quiz Bank</h3>
+@*UI for quiz creations*@
 <EditForm Model="@newQuizBank" OnValidSubmit="HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
@@ -14,7 +14,7 @@
     </div>
     <button type="submit" class="btn btn-primary">Create</button>
 </EditForm>
-
+@*save data of quiz*@
 @code {
     private QuizBank newQuizBank = new();
 

@@ -1,7 +1,7 @@
 ﻿@*written by vishal starting 3/23/2025 CS 4485 *@
 @inject ApplicationDbContext Db
 @using BlazorDesktop
-
+@* forms for student entry*@
 <h4>Manual Student Entry</h4>
 <div class="form-group">
     <label>Student ID:</label>
@@ -35,7 +35,7 @@
 @code {
     private Student manualStudent = new();
     private string statusMessage = string.Empty;
-
+    @* when the button is pressing students are manually inserted*@
     private async Task InsertManualStudent()
     {
         if (manualStudent.studentId == 0 || string.IsNullOrWhiteSpace(manualStudent.utdID) ||
@@ -50,7 +50,7 @@
             Db.Students.Add(manualStudent);
             await Db.SaveChangesAsync();
             statusMessage = $"Student {manualStudent.utdID} added successfully.";
-            manualStudent = new(); // reset form
+            manualStudent = new(); 
         }
         catch (Exception ex)
         {

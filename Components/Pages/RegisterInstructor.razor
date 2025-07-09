@@ -4,7 +4,7 @@
 @inject IJSRuntime JSRuntime
 
 <h3>Instructor Registration</h3>
-
+@*display fields for instructor*@
 <EditForm Model="@instructor" OnValidSubmit="HandleSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
@@ -44,7 +44,7 @@
 
 @code {
     private Instructor instructor = new();
-
+	//validate input fields
     private async Task HandleSubmit()
     {
         if (string.IsNullOrWhiteSpace(instructor.FirstName) ||
@@ -57,10 +57,10 @@
             await JSRuntime.InvokeVoidAsync("alert", "All fields are required.");
             return;
         }
-
+        //save data on DB
         Db.Instructors.Add(instructor);
         await Db.SaveChangesAsync();
         await JSRuntime.InvokeVoidAsync("alert", "Instructor registered successfully!");
-        instructor = new(); // reset form
+        instructor = new(); 
     }
 }

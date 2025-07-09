@@ -1,23 +1,28 @@
-@*written by vishal starting 5/2/2025 CS 4485 *@
+@* written by vishal starting 5/2/2025 CS 4485 *@
+
 @page "/createclass"
 @inject ApplicationDbContext Db
 
 <h3>Create New Class</h3>
-@**@
+
+@* form for creating a new class runs HandleSubmit *@
 <EditForm Model="@newClass" OnValidSubmit="HandleSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
+    @* input for course name *@
     <div class="form-group mb-2">
         <label>Course Name:</label>
         <InputText class="form-control" @bind-Value="newClass.courseName" />
     </div>
 
+    @* input for course number *@
     <div class="form-group mb-2">
         <label>Course Number:</label>
         <InputText class="form-control" @bind-Value="newClass.courseNumber" />
     </div>
 
+    @* dropdown to pick an instructor fromlist *@
     <div class="form-group mb-2">
         <label>Select Instructor:</label>
         <select class="form-control" @bind="newClass.instructorId">
@@ -31,6 +36,7 @@
         </select>
     </div>
 
+    @* submit button to create the class *@
     <button type="submit" class="btn btn-primary mt-3">Create Class</button>
 </EditForm>
 
@@ -40,15 +46,18 @@
 }
 
 @code {
+    
     private Class newClass = new();
     private List<Instructor> instructors = new();
     private string statusMessage = "";
 
+    // loads instructors when page is first opened
     protected override async Task OnInitializedAsync()
     {
         instructors = await Db.Instructors.ToListAsync();
     }
 
+    // save data on db
     private async Task HandleSubmit()
     {
         if (string.IsNullOrWhiteSpace(newClass.courseName) ||
@@ -62,6 +71,6 @@
         Db.Classes.Add(newClass);
         await Db.SaveChangesAsync();
         statusMessage = "Class created successfully!";
-        newClass = new(); 
+        newClass = new();
     }
 }
